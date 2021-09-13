@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Boo.Blog.Data;
 using Serilog;
 using Volo.Abp;
 
@@ -31,10 +30,10 @@ namespace Boo.Blog.DbMigrator
             {
                 application.Initialize();
 
-                await application
-                    .ServiceProvider
-                    .GetRequiredService<BlogDbMigrationService>()
-                    .MigrateAsync();
+                //await application
+                //    .ServiceProvider
+                //    .GetRequiredService<BlogDbMigrationService>()
+                //    .MigrateAsync();
 
                 application.Shutdown();
 

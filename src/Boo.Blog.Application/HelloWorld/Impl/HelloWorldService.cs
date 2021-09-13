@@ -1,12 +1,14 @@
-using Boo.Blog.Application.HelloWorld;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace Boo.Blog.Application.HelloWorld
+namespace Boo.Blog.Application.HelloWorld.Impl
 {
-    public class HelloWorldService : BlogApplicationServiceBase, IHelloWorldService
+    public class HelloWorldService : IHelloWorldService
     {
-        public string HelloWorld()
+        public string  HelloWorld()
         {
-            return "Hello world.";
+            return "hello world.";
         }
     }
 }

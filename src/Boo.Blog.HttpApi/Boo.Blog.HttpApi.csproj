@@ -8,11 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Boo.Blog.Application\Boo.Blog.Application.csproj" />
+    <PackageReference Include="Volo.Abp.Identity.HttpApi" Version="4.4.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Identity.HttpApi" Version="4.4.2" />
+    <ProjectReference Include="..\Boo.Blog.Application\Boo.Blog.Application.csproj" />
   </ItemGroup>
 
 </Project>

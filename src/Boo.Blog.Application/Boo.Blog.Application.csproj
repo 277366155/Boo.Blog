@@ -1,24 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\common.props" />
-
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>Boo.Blog</RootNamespace>
+    <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Boo.Blog.Domain\Boo.Blog.Domain.csproj" />
-    <ProjectReference Include="..\Boo.Blog.Application.Contracts\Boo.Blog.Application.Contracts.csproj" />
+    <PackageReference Include="Volo.Abp.Identity.Application" Version="4.4.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Account.Application" Version="4.4.2" />
-    <PackageReference Include="Volo.Abp.Identity.Application" Version="4.4.2" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="4.4.2" />
-    <PackageReference Include="Volo.Abp.TenantManagement.Application" Version="4.4.2" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.Application" Version="4.4.2" />
-    <PackageReference Include="Volo.Abp.SettingManagement.Application" Version="4.4.2" />
+    <ProjectReference Include="..\Boo.Blog.Application.Caching\Boo.Blog.Application.Caching.csproj" />
+    <ProjectReference Include="..\Boo.Blog.Application.Contracts\Boo.Blog.Application.Contracts.csproj" />
+    <ProjectReference Include="..\Boo.Blog.Domain.Shared\Boo.Blog.Domain.Shared.csproj" />
   </ItemGroup>
 
 </Project>

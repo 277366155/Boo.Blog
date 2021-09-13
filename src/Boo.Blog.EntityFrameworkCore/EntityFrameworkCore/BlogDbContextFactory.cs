@@ -11,7 +11,7 @@ namespace Boo.Blog.EntityFrameworkCore
     {
         public BlogDbContext CreateDbContext(string[] args)
         {
-            BlogEfCoreEntityExtensionMappings.Configure();
+            //BlogEfCoreEntityExtensionMappings.Configure();
 
             var configuration = BuildConfiguration();
 

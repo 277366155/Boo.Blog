@@ -2,13 +2,12 @@
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Boo.Blog.Data;
 using Volo.Abp.DependencyInjection;
 
 namespace Boo.Blog.EntityFrameworkCore
 {
     public class EntityFrameworkCoreBlogDbSchemaMigrator
-        : IBlogDbSchemaMigrator, ITransientDependency
+        :  ITransientDependency
     {
         private readonly IServiceProvider _serviceProvider;
 
