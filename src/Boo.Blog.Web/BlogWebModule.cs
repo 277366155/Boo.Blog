@@ -1,4 +1,5 @@
 using System;
+using Boo.Blog.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Hosting;
 using Volo.Abp;
@@ -11,7 +12,9 @@ namespace Boo.Blog.Web
     [DependsOn(
         typeof(AbpAspNetCoreMvcModule),
         typeof(AbpAutofacModule),
-        typeof(BlogHttpApiModule)
+        typeof(BlogHttpApiModule),
+        typeof(BlogSwaggerModule),
+        typeof(BlogEntityFrameworkCoreModule)
     )]
     public class BlogWebModule : AbpModule
     {

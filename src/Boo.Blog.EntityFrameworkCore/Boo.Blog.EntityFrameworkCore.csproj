@@ -10,6 +10,5 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Boo.Blog.Domain.Shared\Boo.Blog.Domain.Shared.csproj" />
-    <ProjectReference Include="..\Boo.Blog.Domain\Boo.Blog.Domain.csproj" />
   </ItemGroup>
 </Project>

@@ -10,8 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Boo.Blog.Application.Caching\Boo.Blog.Application.Caching.csproj" />
-    <ProjectReference Include="..\Boo.Blog.Application.Contracts\Boo.Blog.Application.Contracts.csproj" />
-    <ProjectReference Include="..\Boo.Blog.Domain.Shared\Boo.Blog.Domain.Shared.csproj" />
+    <ProjectReference Include="..\Boo.Blog.EntityFrameworkCore\Boo.Blog.EntityFrameworkCore.csproj" />
   </ItemGroup>
 
 </Project>

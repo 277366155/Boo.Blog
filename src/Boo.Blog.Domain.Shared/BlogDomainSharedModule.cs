@@ -9,9 +9,9 @@ namespace Boo.Blog
     public class BlogDomainSharedModule : AbpModule
     {
 
-        public override void ConfigureServices(ServiceConfigurationContext context)
-        {
+        //public override void ConfigureServices(ServiceConfigurationContext context)
+        //{
 
-        }
+        //}
     }
 }
