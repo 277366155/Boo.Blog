@@ -1,8 +1,7 @@
-﻿using Boo.Blog.Domain;
-using Volo.Abp.Caching;
+﻿using Volo.Abp.Caching;
 using Volo.Abp.Modularity;
 
-namespace Boo.Blog.Application.Caching
+namespace Boo.Blog.Application
 {
     [DependsOn(
         typeof(AbpCachingModule),

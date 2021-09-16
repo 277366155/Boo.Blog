@@ -2,7 +2,7 @@
 using Volo.Abp.Identity;
 using Volo.Abp.Modularity;
 
-namespace Boo.Blog.Domain
+namespace Boo.Blog
 {
     [DependsOn(
         typeof(AbpIdentityDomainModule)

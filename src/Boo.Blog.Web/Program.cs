@@ -11,8 +11,7 @@ namespace Boo.Blog.Web
             await Host.CreateDefaultBuilder(args)
             .ConfigureWebHostDefaults(builder =>
             {
-                builder.UseIISIntegration()
-                            .UseStartup<Startup>();
+                builder.UseStartup<Startup>();
             }).UseAutofac().Build().RunAsync();
         }
     }

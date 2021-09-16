@@ -17,6 +17,7 @@ namespace Boo.Blog.Web
 
         public void Configure(IApplicationBuilder app)
         {
+            app.InitializeApplication();
         }
     }
 }

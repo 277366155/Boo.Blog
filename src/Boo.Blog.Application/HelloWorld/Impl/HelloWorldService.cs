@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Volo.Abp.Application.Services;
 
-namespace Boo.Blog.Application.HelloWorld.Impl
+namespace Boo.Blog.Application.HelloWorld
 {
-    public class HelloWorldService : IHelloWorldService
+    public class HelloWorldService : ApplicationService, IHelloWorldService
     {
         public string  HelloWorld()
         {

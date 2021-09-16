@@ -1,5 +1,4 @@
-﻿using Boo.Blog.Domain;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.MySQL;
 using Volo.Abp.EntityFrameworkCore.SqlServer;

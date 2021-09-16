@@ -1,9 +1,15 @@
-﻿using System;
+﻿using Volo.Abp.Identity;
 using Volo.Abp.Modularity;
 
-namespace Boo.Blog.Application
+namespace Boo.Blog
 {
-    public class BlogApplicationModule:AbpModule
+    [DependsOn(
+        typeof(AbpIdentityApplicationModule)
+        )]
+    public class BlogApplicationModule : AbpModule
     {
+        public override void ConfigureServices(ServiceConfigurationContext context)
+        {
+        }
     }
 }
