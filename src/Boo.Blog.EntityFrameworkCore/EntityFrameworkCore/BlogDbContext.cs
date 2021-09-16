@@ -1,32 +1,36 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Boo.Blog.Domain.Blog;
+using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Data;
-using Volo.Abp.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.Identity;
-using Volo.Abp.Identity.EntityFrameworkCore;
 
 namespace Boo.Blog.EntityFrameworkCore
 {
-    [ReplaceDbContext(typeof(IIdentityDbContext))]
+    //[ReplaceDbContext(typeof(IIdentityDbContext))]
     [ConnectionStringName("Default")]
-    public class BlogDbContext : 
-        AbpDbContext<BlogDbContext>,
-        IIdentityDbContext        
+    public class BlogDbContext : AbpDbContext<BlogDbContext>//,IIdentityDbContext        
     {
         /* Add DbSet properties for your Aggregate Roots / Entities here. */
         
         #region Entities from the modules
         
-        //Identity
-        public DbSet<IdentityUser> Users { get; set; }
-        public DbSet<IdentityRole> Roles { get; set; }
-        public DbSet<IdentityClaimType> ClaimTypes { get; set; }
-        public DbSet<OrganizationUnit> OrganizationUnits { get; set; }
-        public DbSet<IdentitySecurityLog> SecurityLogs { get; set; }
-        public DbSet<IdentityLinkUser> LinkUsers { get; set; }
+        ////Identity
+        //public DbSet<IdentityUser> Users { get; set; }
+        //public DbSet<IdentityRole> Roles { get; set; }
+        //public DbSet<IdentityClaimType> ClaimTypes { get; set; }
+        //public DbSet<OrganizationUnit> OrganizationUnits { get; set; }
+        //public DbSet<IdentitySecurityLog> SecurityLogs { get; set; }
+        //public DbSet<IdentityLinkUser> LinkUsers { get; set; }
         
         #endregion
         
+        public DbSet<Post> Posts { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<PostTag> PostTags { get; set; }
+        public DbSet<FriendLink> FriendLinks { get; set; }
+
         public BlogDbContext(DbContextOptions<BlogDbContext> options)
             : base(options)
         {
@@ -37,18 +41,9 @@ namespace Boo.Blog.EntityFrameworkCore
         {
             base.OnModelCreating(builder);
 
-            /* Include modules to your migration db context */
+            builder.Configure();
+            //builder.ConfigureIdentity();
 
-            builder.ConfigureIdentity();
-
-            /* Configure your own tables/entities inside here */
-
-            //builder.Entity<YourEntity>(b =>
-            //{
-            //    b.ToTable(BlogConsts.DbTablePrefix + "YourEntities", BlogConsts.DbSchema);
-            //    b.ConfigureByConvention(); //auto configure for the base class props
-            //    //...
-            //});
         }
     }
 }

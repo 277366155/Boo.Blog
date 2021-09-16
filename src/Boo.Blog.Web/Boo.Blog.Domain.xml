@@ -4,5 +4,22 @@
         <name>Boo.Blog.Domain</name>
     </assembly>
     <members>
+        <member name="M:Boo.Blog.Domain.Configurations.AppSettings.InitConfigurationBuilder(System.Action{Microsoft.Extensions.Configuration.IConfigurationBuilder})">
+            <summary>
+            默认读取appsettings.json文件
+            </summary>
+            <param name="act">可添加其他配置文件</param>
+            <returns></returns>
+        </member>
+        <member name="P:Boo.Blog.Domain.Configurations.AppSettings.Configuration">
+            <summary>
+            读取配置
+            </summary>
+        </member>
+        <member name="P:Boo.Blog.Domain.Configurations.AppSettings.AppSetting">
+            <summary>
+            读取根节点下的appsetting节点
+            </summary>
+        </member>
     </members>
 </doc>
