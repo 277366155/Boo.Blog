@@ -5,7 +5,7 @@ namespace Boo.Blog
 {
     [DependsOn(
         typeof(AbpIdentityHttpApiModule),
-        typeof(BlogApplicationModule)
+        typeof(BlogApplicationContractsModule)
         )]
     public class BlogHttpApiModule : AbpModule
     {
