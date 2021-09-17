@@ -7,7 +7,7 @@ using Volo.Abp.Identity;
 namespace Boo.Blog.EntityFrameworkCore
 {
     //[ReplaceDbContext(typeof(IIdentityDbContext))]
-    [ConnectionStringName("Default")]
+    [ConnectionStringName("MySql")]
     public class BlogDbContext : AbpDbContext<BlogDbContext>//,IIdentityDbContext        
     {
         /* Add DbSet properties for your Aggregate Roots / Entities here. */
@@ -25,7 +25,6 @@ namespace Boo.Blog.EntityFrameworkCore
         #endregion
         
         public DbSet<Post> Posts { get; set; }
-
         public DbSet<Category> Categories { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<PostTag> PostTags { get; set; }
@@ -41,7 +40,8 @@ namespace Boo.Blog.EntityFrameworkCore
         {
             base.OnModelCreating(builder);
 
-            builder.Configure();
+            //builder.Configure();
+
             //builder.ConfigureIdentity();
 
         }
