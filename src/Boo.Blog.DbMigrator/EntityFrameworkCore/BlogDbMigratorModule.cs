@@ -6,7 +6,6 @@ using Volo.Abp.Modularity;
 namespace Boo.Blog.DbMigrator.EntityFrameworkCore
 {
     [DependsOn(
-        //typeof(AbpAutofacModule),
         typeof(BlogEntityFrameworkCoreModule)
         )]
     public class BlogDbMigratorModule : AbpModule

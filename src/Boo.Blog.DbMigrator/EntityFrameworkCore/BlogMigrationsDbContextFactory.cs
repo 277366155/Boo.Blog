@@ -9,8 +9,18 @@ namespace Boo.Blog.DbMigrator.EntityFrameworkCore
     {
         public BlogMigrationsDbContext CreateDbContext(string[] args)
         {
-            var builder = new DbContextOptionsBuilder<BlogMigrationsDbContext>()
-                .UseMySql(AppSettings.Configuration.GetConnectionString("MySql"), MySqlServerVersion.LatestSupportedServerVersion);
+            var builder = new DbContextOptionsBuilder<BlogMigrationsDbContext>();
+            switch (AppSettings.EnableDb)
+            {
+                default:
+                case "MYSQL":
+                    builder.UseMySql(AppSettings.Configuration.GetConnectionString("MySql"), MySqlServerVersion.LatestSupportedServerVersion);
+                    break;
+                case "MSSQL":
+                    builder.UseSqlServer(AppSettings.Configuration.GetConnectionString("MSSql"));
+                    break;
+            }
+                
             return new BlogMigrationsDbContext(builder.Options);
         }
         

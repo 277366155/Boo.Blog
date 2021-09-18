@@ -1,4 +1,5 @@
 ﻿using Boo.Blog.Application.Contracts.Blog;
+using Boo.Blog.Blog.DTO;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,12 +12,12 @@ namespace Boo.Blog.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class BlogController:AbpController
+    public class BlogController : AbpController
     {
-        IBlogService _blogService;
+        readonly IBlogService _blogService;
         public BlogController(IBlogService blogService)
-        { 
-            _blogService= blogService; 
+        {
+            _blogService = blogService;
         }
 
         /// <summary>
@@ -25,9 +26,21 @@ namespace Boo.Blog.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> GetBlog(int id)
+        public async Task<IActionResult> GetBlogCount()
         {
-            var data= await _blogService.BulkInsertAsync(id);
+            var data = await _blogService.GetPostsCountAsync();
+            return Json(data);
+        }
+
+        /// <summary>
+        ///创建博文
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPost("add")]
+        public async Task<IActionResult> InsertBlogAsync(PostDto input)
+        {
+           var data = await _blogService.CreateAsync(input);
             return Json(data);
         }
     }

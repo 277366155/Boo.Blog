@@ -13,19 +13,19 @@ namespace Boo.Blog.Web
         typeof(AbpAspNetCoreMvcModule),
         typeof(AbpAutofacModule),
         typeof(BlogHttpApiModule),
-        typeof(BlogSwaggerModule),
+        //typeof(BlogSwaggerModule),
         typeof(BlogEntityFrameworkCoreModule)
     )]
     public class BlogWebModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            base.ConfigureServices(context);
+            context.Services.AddSwagger();
         }
         public override void OnApplicationInitialization(ApplicationInitializationContext context)
         {
             // base.OnApplicationInitialization(context);
-            var app = context.GetApplicationBuilder();
+            var app = context.GetApplicationBuilder().UseSwagger().UseSwaggerUI();
             var env = context.GetEnvironment();
             
             if(env.IsDevelopment())

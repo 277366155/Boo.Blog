@@ -9,15 +9,19 @@ using System.Collections.Generic;
 
 namespace Boo.Blog.Application.Blog
 {
-    public class BlogService : CrudAppService<Post, PostDto, long>, IBlogService
+    public class BlogService : CrudAppService<Post, PostDto, long>, IBlogService  //ServiceBase, IBlogService
     {
-        public BlogService(IRepository<Post,long> repository) : base(repository)
+        public BlogService(IRepository<Post, long> repository) : base(repository)
         {
         }
-
-        public async Task<int> BulkInsertAsync(int n)//(IEnumerable<PostDto> postDto)
+        //IPostRepository _postRepository;
+        //public BlogService(IPostRepository postRepository)
+        //{
+        //    _postRepository = postRepository;
+        //}
+        public async Task<long> GetPostsCountAsync()
         {
-            return await Task.Run(() =>n);
+            return await Repository.GetCountAsync();
         }
     }
 }

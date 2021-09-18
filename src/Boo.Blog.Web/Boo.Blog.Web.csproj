@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="BlogSwaggerModule.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Boo.Blog.HttpApi\Boo.Blog.HttpApi.csproj" />
   </ItemGroup>
 
