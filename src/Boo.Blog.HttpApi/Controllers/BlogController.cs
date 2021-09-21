@@ -1,5 +1,6 @@
 ﻿using Boo.Blog.Application.Contracts.Blog;
 using Boo.Blog.Blog.DTO;
+using Boo.Blog.Paged;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -42,6 +43,19 @@ namespace Boo.Blog.Controllers
         {
            var data = await _blogService.CreateAsync(input);
             return Json(data);
+        }
+
+        /// <summary>
+        /// 获取分页列表
+        /// </summary>
+        /// <param name="page"></param>
+        /// <returns></returns>
+        [HttpPost("getList")]
+        public async Task<IActionResult> GetListAsync(PageParam page)
+        {
+            var data = await _blogService.GetListAsync(page);
+            return Json(data);
+
         }
     }
 }

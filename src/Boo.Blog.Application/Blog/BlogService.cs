@@ -1,27 +1,21 @@
-﻿using Volo.Abp.Application.Services;
-using Boo.Blog.Application.Contracts.Blog;
+﻿using Boo.Blog.Application.Contracts.Blog;
 using Boo.Blog.Blog.DTO;
 using Boo.Blog.Domain.Blog;
-using Boo.Blog.Domain.Blog.IRepositories;
 using Volo.Abp.Domain.Repositories;
 using System.Threading.Tasks;
-using System.Collections.Generic;
+using Boo.Blog.Response;
 
 namespace Boo.Blog.Application.Blog
 {
-    public class BlogService : CrudAppService<Post, PostDto, long>, IBlogService  //ServiceBase, IBlogService
+    public class BlogService : ServiceBase<Post, PostDto, long>, IBlogService 
     {
         public BlogService(IRepository<Post, long> repository) : base(repository)
         {
         }
-        //IPostRepository _postRepository;
-        //public BlogService(IPostRepository postRepository)
-        //{
-        //    _postRepository = postRepository;
-        //}
-        public async Task<long> GetPostsCountAsync()
+        public async Task<ResponseDataResult<long>> GetPostsCountAsync()
         {
-            return await Repository.GetCountAsync();
+            var data = await Repository.GetCountAsync();
+            return ResponseDataResult<long>.IsSuccess(data, "ok");
         }
     }
 }

@@ -1,11 +1,12 @@
 ﻿using Volo.Abp.Application.Services;
 using Boo.Blog.Blog.DTO;
 using System.Threading.Tasks;
+using Boo.Blog.Response;
 
 namespace Boo.Blog.Application.Contracts.Blog
 {
-    public interface IBlogService : ICrudAppService<PostDto, long>
+    public interface IBlogService : IServiceBase<PostDto, long>
     {
-        Task<long> GetPostsCountAsync();// (IEnumerable<PostDto> postDto);
+        Task<ResponseDataResult<long>> GetPostsCountAsync();// (IEnumerable<PostDto> postDto);
     }
 }

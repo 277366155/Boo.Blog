@@ -19,4 +19,8 @@
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Identity.Domain.Shared" Version="4.4.2" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Enums\" />
+  </ItemGroup>
 </Project>
