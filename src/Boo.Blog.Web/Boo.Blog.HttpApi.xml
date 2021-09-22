@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Boo.Blog.HttpApi</name>
+    </assembly>
+    <members>
+        <member name="M:Boo.Blog.Controllers.BlogController.GetBlogCount">
+             <summary>
+            根据id获取博文
+             </summary>
+             <param name="id"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Boo.Blog.Controllers.BlogController.InsertBlogAsync(Boo.Blog.Blog.DTO.PostDto)">
+             <summary>
+            创建博文
+             </summary>
+             <param name="input"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Boo.Blog.Controllers.BlogController.GetListAsync(Boo.Blog.Paged.PageParam)">
+            <summary>
+            获取分页列表
+            </summary>
+            <param name="page"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

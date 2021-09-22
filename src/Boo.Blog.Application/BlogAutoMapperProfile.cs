@@ -11,11 +11,18 @@ namespace Boo.Blog
         public BlogAutoMapperProfile()
         {
             CreateMap<Post, PostDto>().ReverseMap();
-            CreateMap<PageParam, PagedAndSortedResultRequestDto>().AfterMap((s, d) => {
-                d.SkipCount = s.PageIndex > 0 ? s.PageIndex * s.PageSize : 0;
-                d.MaxResultCount = s.PageSize;
-                d.Sorting = s.Sort;
-            });
+            CreateMap<PageParam, PagedAndSortedResultRequestDto>()
+                .ForMember(d => d.SkipCount, opt => opt.MapFrom(a=> a.PageIndex > 0 ? a.PageIndex * a.PageSize : 0))
+                .ForMember(d=>d.MaxResultCount, opt => opt.MapFrom(a=>a.PageSize))
+                .ForMember(d=>d.Sorting,opt=>opt.MapFrom(a=>a.Sort))
+                .ReverseMap();
+
+            //todo: automapper泛型映射问题
+            CreateMap<PagedResultDto<object>, PageResult<object>>()
+                .ForMember(d => d.PageIndex, opt => opt.Ignore())
+                .ForMember(d => d.PageCount, opt => opt.Ignore())
+                .ForMember(d => d.PageSize, opt => opt.Ignore());
+                
         }
     }
 }

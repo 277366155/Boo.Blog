@@ -7,15 +7,15 @@ namespace Boo.Blog
 {
     public interface IServiceBase<TEntityDto, in TKey> : ICrudAppService<TEntityDto, TKey>
     {
-        public new Task<ResponseResult> CreateAsync(TEntityDto input);
+        public new Task<ResponseDataResult<TEntityDto>> CreateAsync(TEntityDto input);
 
-        public new Task<ResponseResult> GetAsync(TKey id);
+        public new Task<ResponseDataResult<TEntityDto>> GetAsync(TKey id);
 
-        public Task<ResponseResult> GetListAsync(PageParam input);
+        public Task<ResponseDataResult<PageResult<TEntityDto>>> GetListAsync(PageParam input);
 
         public new Task<ResponseResult> DeleteAsync(TKey id);
 
-        public new Task<ResponseResult> UpdateAsync(TKey id, TEntityDto input);
+        public new Task<ResponseDataResult<TEntityDto>> UpdateAsync(TKey id, TEntityDto input);
 
     }
 }
