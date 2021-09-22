@@ -15,7 +15,7 @@ namespace Boo.Blog.Application.Blog
         public async Task<ResponseDataResult<long>> GetPostsCountAsync()
         {
             var data = await Repository.GetCountAsync();
-            return ResponseDataResult<long>.IsSuccess(data, "ok");
+            return ResponseResult.IsSuccess(data, "ok");
         }
     }
 }

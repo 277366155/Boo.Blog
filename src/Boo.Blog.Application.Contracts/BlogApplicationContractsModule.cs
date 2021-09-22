@@ -1,7 +1,4 @@
-﻿using Volo.Abp.Modularity;
-using Volo.Abp.ObjectExtending;
-
-namespace Boo.Blog
+﻿namespace Boo.Blog
 {
     //[DependsOn(
     //    typeof(BlogDomainSharedModule),
@@ -11,7 +8,7 @@ namespace Boo.Blog
     //{
     //    public override void PreConfigureServices(ServiceConfigurationContext context)
     //    {
-            
+
     //    }
     //}
 }

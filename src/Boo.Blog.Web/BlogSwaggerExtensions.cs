@@ -18,6 +18,7 @@ namespace Boo.Blog.Web
                 });
               opt.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "Boo.Blog.Domain.xml"));
               opt.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "Boo.Blog.Application.Contracts.xml"));
+              opt.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "Boo.Blog.HttpApi.xml"));
           });
         }
 

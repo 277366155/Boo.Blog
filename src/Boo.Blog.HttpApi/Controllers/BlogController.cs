@@ -1,5 +1,6 @@
 ﻿using Boo.Blog.Application.Contracts.Blog;
 using Boo.Blog.Blog.DTO;
+using Boo.Blog.Domain.Blog;
 using Boo.Blog.Paged;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -51,7 +52,7 @@ namespace Boo.Blog.Controllers
         /// <param name="page"></param>
         /// <returns></returns>
         [HttpPost("getList")]
-        public async Task<IActionResult> GetListAsync(PageParam page)
+        public async Task<IActionResult> GetListAsync(PageParam<Post> page)
         {
             var data = await _blogService.GetListAsync(page);
             return Json(data);

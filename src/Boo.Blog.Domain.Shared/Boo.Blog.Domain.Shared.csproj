@@ -10,17 +10,16 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Localization\Blog\*.json" />
+    <Compile Remove="Enums\**" />
     <Compile Remove="MultiTenancy\**" />
     <Content Remove="Localization\Blog\*.json" />
+    <EmbeddedResource Remove="Enums\**" />
     <EmbeddedResource Remove="MultiTenancy\**" />
+    <None Remove="Enums\**" />
     <None Remove="MultiTenancy\**" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Identity.Domain.Shared" Version="4.4.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Enums\" />
   </ItemGroup>
 </Project>
