@@ -22,4 +22,8 @@
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Identity.Domain.Shared" Version="4.4.2" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Boo.Blog.ToolKits\Boo.Blog.ToolKits.csproj" />
+  </ItemGroup>
 </Project>

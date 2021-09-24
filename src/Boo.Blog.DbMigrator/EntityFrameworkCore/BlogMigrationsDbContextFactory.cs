@@ -1,4 +1,4 @@
-﻿using Boo.Blog.Domain.Configurations;
+﻿using Boo.Blog.ToolKits.Configurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
