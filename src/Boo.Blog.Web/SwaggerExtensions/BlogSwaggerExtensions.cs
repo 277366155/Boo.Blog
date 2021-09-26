@@ -1,7 +1,9 @@
-﻿using Boo.Blog.ToolKits.Configurations;
+﻿using Boo.Blog.Consts;
+using Boo.Blog.ToolKits.Configurations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System;
 using System.Collections.Generic;
@@ -44,10 +46,30 @@ namespace Boo.Blog.Web
         {
             return services.AddSwaggerGen(opt =>
             {
+                #region 授权验证
+                var security = new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Description = "JWT授权，输入格式为【Bearer {token}】"
+                };
+                opt.AddSecurityDefinition("JWT", security);
+                opt.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    { security, new List<string>() }
+                });
+                opt.OperationFilter<AddResponseHeadersFilter>();
+                opt.OperationFilter<AppendAuthorizeToSummaryOperationFilter>();
+                opt.OperationFilter<SecurityRequirementsOperationFilter>();
+                #endregion 授权验证
+
+                #region swagger文档分组
                 ApiInfos.ForEach(a =>
                 {
                     opt.SwaggerDoc(a.UrlPrefix, a.OpenApiInfo);
                 });
+                #endregion swagger文档分组
 
                 opt.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "Boo.Blog.Domain.xml"));
                 opt.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "Boo.Blog.Application.Contracts.xml"));
@@ -65,13 +87,13 @@ namespace Boo.Blog.Web
                 });
                 // 模型的默认扩展深度，设置为 -1 完全隐藏模型
                 config.DefaultModelsExpandDepth(-1);
-                
+
                 // API文档仅展开标记
                 config.DocExpansion(DocExpansion.List);
-                
+
                 // API前缀设置为空
                 config.RoutePrefix = string.Empty;
-                
+
                 // API页面Title
                 config.DocumentTitle = "😍接口文档";
             });

@@ -14,10 +14,10 @@ namespace Boo.Blog.DbMigrator.EntityFrameworkCore
             {
                 default:
                 case "MYSQL":
-                    builder.UseMySql(AppSettings.Configuration.GetConnectionString("MySql"), MySqlServerVersion.LatestSupportedServerVersion);
+                    builder.UseMySql(AppSettings.Root.GetConnectionString("MySql"), MySqlServerVersion.LatestSupportedServerVersion);
                     break;
                 case "MSSQL":
-                    builder.UseSqlServer(AppSettings.Configuration.GetConnectionString("MSSql"));
+                    builder.UseSqlServer(AppSettings.Root.GetConnectionString("MSSql"));
                     break;
             }
                 

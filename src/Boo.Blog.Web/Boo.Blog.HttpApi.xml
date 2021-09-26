@@ -25,5 +25,16 @@
             <param name="page"></param>
             <returns></returns>
         </member>
+        <member name="T:Boo.Blog.HttpApi.Controllers.HelloWorldController">
+            <summary>
+            测试swagger文档
+            </summary>
+        </member>
+        <member name="M:Boo.Blog.HttpApi.Controllers.HelloWorldController.HelloWorld">
+            <summary>
+            测试接口
+            </summary>
+            <returns></returns>
+        </member>
     </members>
 </doc>

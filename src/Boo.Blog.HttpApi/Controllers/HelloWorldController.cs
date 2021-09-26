@@ -1,11 +1,16 @@
 using Boo.Blog.Application.HelloWorld;
+using Boo.Blog.Consts;
 using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc;
 
 namespace Boo.Blog.HttpApi.Controllers
 {
+    /// <summary>
+    /// ≤‚ ‘swaggerŒƒµµ
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
+    [ApiExplorerSettings(GroupName = SwaggerGrouping.GroupNameV2)]
     public class HelloWorldController : AbpController
     {
         readonly IHelloWorldService _helloWorldService;
@@ -14,6 +19,10 @@ namespace Boo.Blog.HttpApi.Controllers
             _helloWorldService = helloWorldService;
         }
 
+        /// <summary>
+        /// ≤‚ ‘Ω”ø⁄
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public string HelloWorld()
         {

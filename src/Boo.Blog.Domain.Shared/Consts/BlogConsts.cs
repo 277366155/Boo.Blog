@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Boo.Blog
+﻿namespace Boo.Blog.Consts
 {
-   public  class BlogConsts
+    public  class BlogConsts
     {
         public const string DbTablePrefix = "boo_";
         /// <summary>
