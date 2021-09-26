@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Boo.Blog.Consts;
+using System;
 
 namespace Boo.Blog.Response
 {

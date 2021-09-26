@@ -4,6 +4,12 @@
         <name>Boo.Blog.HttpApi</name>
     </assembly>
     <members>
+        <member name="M:Boo.Blog.Controllers.AuthController.GetLoginAddressAsync">
+            <summary>
+            获取登录地址（GitHub）
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Boo.Blog.Controllers.BlogController.GetBlogCount">
              <summary>
             根据id获取博文
@@ -23,6 +29,17 @@
             获取分页列表
             </summary>
             <param name="page"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boo.Blog.HttpApi.Controllers.HelloWorldController">
+            <summary>
+            测试swagger文档
+            </summary>
+        </member>
+        <member name="M:Boo.Blog.HttpApi.Controllers.HelloWorldController.HelloWorld">
+            <summary>
+            测试接口
+            </summary>
             <returns></returns>
         </member>
     </members>

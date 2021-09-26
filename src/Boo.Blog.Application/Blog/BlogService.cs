@@ -1,4 +1,4 @@
-﻿using Boo.Blog.Application.Contracts.Blog;
+﻿using Boo.Blog.Blog;
 using Boo.Blog.Blog.DTO;
 using Boo.Blog.Domain.Blog;
 using Volo.Abp.Domain.Repositories;

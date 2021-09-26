@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Boo.Blog.Response;
 using Boo.Blog.Domain.Blog;
 
-namespace Boo.Blog.Application.Contracts.Blog
+namespace Boo.Blog.Blog
 {
     public interface IBlogService : IServiceBase<Post,PostDto, long>
     {

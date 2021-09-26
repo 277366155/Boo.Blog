@@ -1,20 +1,15 @@
-﻿using Boo.Blog.Application.Contracts.Blog;
+﻿using Boo.Blog.Blog;
 using Boo.Blog.Blog.DTO;
+using Boo.Blog.Consts;
 using Boo.Blog.Domain.Blog;
 using Boo.Blog.Paged;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Volo.Abp.AspNetCore.Mvc;
 
 namespace Boo.Blog.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class BlogController : AbpController
+    [ApiExplorerSettings(GroupName = SwaggerGrouping.GroupNameV1)]
+    public class BlogController : ApiBaseController
     {
         readonly IBlogService _blogService;
         public BlogController(IBlogService blogService)

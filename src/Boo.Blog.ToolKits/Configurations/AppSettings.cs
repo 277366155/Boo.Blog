@@ -35,49 +35,49 @@ namespace Boo.Blog.ToolKits.Configurations
                         .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
                         _builder = builder;
                         ChangeToken.OnChange(
-                            () => Configuration.GetReloadToken(),
-                            () => Configuration = _builder.Build());
+                            () => Root.GetReloadToken(),
+                            () => Root = _builder.Build());
                     }
                 }
             }
             if (act != null)
             {
                 act?.Invoke(_builder);
-                configuration = _builder.Build();
+                root = _builder.Build();
             }
 
             return _builder;
         }
 
-        static IConfigurationRoot configuration;
+        static IConfigurationRoot root;
         static object configLockObj = new object();
 
         /// <summary>
         /// 读取配置
         /// </summary>
-        public static IConfigurationRoot Configuration
+        public static IConfigurationRoot Root
         {
             get
             {
-                if (configuration == null)
+                if (root == null)
                 {
                     lock (configLockObj)
                     {
-                        if (configuration == null)
+                        if (root == null)
                         {
-                            configuration = _builder.Build();
+                            root = _builder.Build();
                         }
                     }
                 }
-                return configuration;
+                return root;
             }
             set
             {
-                configuration = value;
+                root = value;
             }
         }
 
-        public static string EnableDb => Configuration["ConnectionStrings:EnableDb"];
+        public static string EnableDb => Root["ConnectionStrings:EnableDb"];
         /// <summary>
         /// 读取根节点下的appsetting节点
         /// </summary>
@@ -85,7 +85,7 @@ namespace Boo.Blog.ToolKits.Configurations
         {
             get
             {
-                return Configuration.GetSection("AppSetting");
+                return Root.GetSection("AppSetting");
             }
         }
     }
