@@ -54,7 +54,7 @@ namespace Boo.Blog.Web
                     Type = SecuritySchemeType.ApiKey,
                     Description = "JWT授权，输入格式为【Bearer {token}】"
                 };
-                opt.AddSecurityDefinition("JWT", security);
+                opt.AddSecurityDefinition("oauth2", security);
                 opt.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
                     { security, new List<string>() }

@@ -10,11 +10,24 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Boo.Blog.Controllers.AuthController.GetAccessTokenAsync(System.String)">
+            <summary>
+            根据code获取accessToken
+            </summary>
+            <param name="code"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boo.Blog.Controllers.AuthController.GenerateTokenAsync(System.String)">
+             <summary>
+            根据accessToken获取jwtToken
+             </summary>
+             <param name="accessToken"></param>
+             <returns></returns>
+        </member>
         <member name="M:Boo.Blog.Controllers.BlogController.GetBlogCount">
              <summary>
             根据id获取博文
              </summary>
-             <param name="id"></param>
              <returns></returns>
         </member>
         <member name="M:Boo.Blog.Controllers.BlogController.InsertBlogAsync(Boo.Blog.Blog.DTO.PostDto)">

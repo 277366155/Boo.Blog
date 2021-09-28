@@ -1,4 +1,5 @@
 ﻿using Boo.Blog.Consts;
+using Boo.Blog.ToolKits.Extensions;
 using System;
 
 namespace Boo.Blog.Response
@@ -7,7 +8,7 @@ namespace Boo.Blog.Response
     {
         public ResponseResultCode Code { get; set; }
         public string Message { get; set; }
-        public long TimeStamp => (DateTime.UtcNow.Ticks - BlogConsts.BaseTicks) / 10000;
+        public long TimeStamp => DateTime.Now.ToTicks();
 
         #region 返回类型为ResponseResult
         public static ResponseResult IsSucess(string msg = "Succeed")

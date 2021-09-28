@@ -13,7 +13,7 @@ namespace Boo.Blog
 
         public static int UserId =int.Parse( AppSettings.Root["GitHub:UserId"]);
         public static string ClientID = AppSettings.Root["GitHub:ClientID"];
-        public static string ClientSecret = AppSettings.Root["GitHub:Secert"];
+        public static string ClientSecret = AppSettings.Root["GitHub:ClientSecret"];
         public static string RedirectUri = AppSettings.Root["GitHub:RedirectUri"];
         public static string ApplicationName = AppSettings.Root["GitHub:ApplicationName"];
     }

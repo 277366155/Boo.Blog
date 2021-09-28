@@ -1,10 +1,17 @@
 ﻿using Boo.Blog.Authorize;
 using Boo.Blog.Authorize.DTO;
 using Boo.Blog.Response;
+using Boo.Blog.ToolKits.Configurations;
+using Boo.Blog.ToolKits.Extensions;
+using Boo.Blog.ToolKits.JwtUtil;
+using Microsoft.IdentityModel.Tokens;
 using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Services;
 
@@ -19,11 +26,43 @@ namespace Boo.Blog.Application.Authorize
             _httpClient = httpClient;
         }
 
-        public Task<ResponseDataResult<string>> GenerateTokenAsync(string accessToken)
+        /// <summary>
+        /// 生成jwtToken
+        /// </summary>
+        /// <param name="accessToken"></param>
+        /// <returns></returns>
+        public async Task<ResponseDataResult<string>> GenerateTokenAsync(string accessToken)
         {
-            throw new NotImplementedException();
+            //GitHubConfig.ApiUser;
+            using var client = _httpClient.CreateClient();
+            client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36");
+            client.DefaultRequestHeaders.Add("Authorization",$"Token {accessToken}");
+            var httpResponse =await  client.GetAsync(GitHubConfig.ApiUser);
+            var content = await httpResponse.Content.ReadAsStringAsync();
+            if (httpResponse.StatusCode != HttpStatusCode.OK)
+            {
+                return ResponseResult.IsFail<string>($"accessToken错误：{content}");
+            }
+            var userData = content.ToObj<UserResponseDTO>();
+            if (userData == null || userData.Id != GitHubConfig.UserId)
+            {
+                return ResponseResult.IsFail<string>("获取用户信息错误");
+            }
+            var token = JwtUtil.JwtSecurityToken(
+                userData.Name,
+                userData.Email,
+                AppSettings.Root["Jwt:Domain"],
+                AppSettings.Root["Jwt:Expires"].TryToInt(),
+                AppSettings.Root["Jwt:SecurityKey"]);
+
+            return ResponseResult.IsSuccess(token);
         }
 
+        /// <summary>
+        /// 跟进code获取accessToken
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
         public async Task<ResponseDataResult<string>> GetAccessTokenAsync(string code)
         {
             if (string.IsNullOrWhiteSpace(code))
@@ -45,6 +84,10 @@ namespace Boo.Blog.Application.Authorize
                 return ResponseResult.IsFail<string>("code错误："+response);
         }
 
+        /// <summary>
+        ///获取登录地址
+        /// </summary>
+        /// <returns></returns>
         public async Task<ResponseDataResult<string>> GetLoginAddressAsync()
         {
             var request = new AuthorizeRequestDTO();
