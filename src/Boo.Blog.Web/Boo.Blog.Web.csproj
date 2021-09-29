@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Boo.Blog.HttpApi\Boo.Blog.HttpApi.csproj" />
+    <ProjectReference Include="..\Boo.Blog.Middleware\Boo.Blog.Middleware.csproj" />
   </ItemGroup>
 
   <ItemGroup>

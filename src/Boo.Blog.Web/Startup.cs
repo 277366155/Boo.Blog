@@ -9,10 +9,10 @@ namespace Boo.Blog.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplication<BlogWebModule>();
-            services.Configure<AbpExceptionHandlingOptions>(opt =>
-            {
-                opt.SendExceptionsDetailsToClients = true;
-            });
+            //services.Configure<AbpExceptionHandlingOptions>(opt =>
+            //{
+            //    opt.SendExceptionsDetailsToClients = true;
+            //});
         }
 
         public void Configure(IApplicationBuilder app)

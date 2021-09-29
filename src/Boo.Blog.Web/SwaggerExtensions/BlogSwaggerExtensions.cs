@@ -21,23 +21,23 @@ namespace Boo.Blog.Web
         /// </summary>
         static readonly List<SwaggerApiInfo> ApiInfos = new List<SwaggerApiInfo>
         {
-        new SwaggerApiInfo{
-            Name="前台接口",
+                    new SwaggerApiInfo{
+            Name="JWT授权接口",
             UrlPrefix=SwaggerGrouping.GroupNameV1,
             OpenApiInfo= new OpenApiInfo
             {
                 Version=apiVersion,
-                 Title="前台接口文档",
+                 Title="JWT授权接口文档",
                   Description=description
             }
         },
         new SwaggerApiInfo{
-            Name="JWT授权接口",
+            Name="前台接口",
             UrlPrefix=SwaggerGrouping.GroupNameV2,
             OpenApiInfo= new OpenApiInfo
             {
                 Version=apiVersion,
-                 Title="JWT授权接口文档",
+                 Title="前台接口文档",
                   Description=description
             }
         }

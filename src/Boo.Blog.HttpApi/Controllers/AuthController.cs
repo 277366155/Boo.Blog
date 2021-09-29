@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Boo.Blog.Controllers
 {
     [AllowAnonymous]
-    [ApiExplorerSettings(GroupName= SwaggerGrouping.GroupNameV2)]
+    [ApiExplorerSettings(GroupName= SwaggerGrouping.GroupNameV1)]
     public class AuthController : ApiBaseController
     {
         readonly IAuthorizeService _authorizeService;

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Boo.Blog.Controllers
 {
     [Authorize]
-    [ApiExplorerSettings(GroupName = SwaggerGrouping.GroupNameV1)]
+    [ApiExplorerSettings(GroupName = SwaggerGrouping.GroupNameV2)]
     public class BlogController : ApiBaseController
     {
         readonly IBlogService _blogService;
@@ -52,7 +52,12 @@ namespace Boo.Blog.Controllers
         {
             var data = await _blogService.GetListAsync(page);
             return Json(data);
+        }
 
+        [HttpGet("test")]
+        public async Task<IActionResult> Test()
+        {
+            throw new System.Exception("test exception.");
         }
     }
 }
