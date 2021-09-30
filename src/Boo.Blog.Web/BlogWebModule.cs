@@ -50,8 +50,9 @@ namespace Boo.Blog.Web
             context.Services.AddHttpClient();
 
             //移除AbpExceptionFilter
-            Configure<MvcOptions>(opt=> {
-                var filterMetadata = opt.Filters.FirstOrDefault(a=>a is ServiceFilterAttribute attribute&&attribute.ServiceType.Equals(typeof(AbpExceptionFilter)));
+            Configure<MvcOptions>(opt =>
+            {
+                var filterMetadata = opt.Filters.FirstOrDefault(a => a is ServiceFilterAttribute attribute && attribute.ServiceType.Equals(typeof(AbpExceptionFilter)));
                 opt.Filters.Remove(filterMetadata);
             });
         }
@@ -67,8 +68,9 @@ namespace Boo.Blog.Web
                 app.UseDeveloperExceptionPage();
             }
             app.UseRouting();
-            app.UseMiddleware<GloableExceptionHandlerMiddleware>();
 
+            app.UseMiddleware<GloableExceptionHandlerMiddleware>();
+            app.UseMiddleware<SerilogHandlerMiddleware>();
             //身份验证，必须放在UseRouting()与UseEndpoints()之间
             app.UseAuthentication();
             //认证授权

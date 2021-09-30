@@ -12,6 +12,8 @@ namespace Boo.Blog.Middleware
         readonly RequestDelegate _next;
         public GloableExceptionHandlerMiddleware(RequestDelegate next)
         {
+            if (next == null)
+                throw new ArgumentNullException(nameof(next));
             _next = next;
         }
 
