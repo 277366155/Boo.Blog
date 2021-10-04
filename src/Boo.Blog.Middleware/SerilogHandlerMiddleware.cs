@@ -28,11 +28,11 @@ namespace Boo.Blog.Middleware
             var start = Stopwatch.GetTimestamp();
             try
             {
-                await _next.Invoke(context);               
+                await _next.Invoke(context);
 
                 var statusCode = context.Response?.StatusCode;
 
-                var level= LogEventLevel.Information;
+                var level = LogEventLevel.Information;
                 if (statusCode > 399 && statusCode < 500)
                 {
                     level = LogEventLevel.Warning;
@@ -43,14 +43,15 @@ namespace Boo.Blog.Middleware
                 }
 
                 var log = level == LogEventLevel.Error ? LogForErrorContext(context) : Log;
-                log.Write(level, MessageTemplate, context.Request.Method, GetPath(context), statusCode, GetElapsedMilliseconds(start,Stopwatch.GetTimestamp()));
+                log.Write(level, MessageTemplate, context.Request.Method, GetPath(context), statusCode, GetElapsedMilliseconds(start, Stopwatch.GetTimestamp()));
             }
-            catch (Exception ex) when (LogException(context,start, ex)) { }
+            catch (Exception ex) when (LogException(context, start, ex)) { }
 
         }
 
         static bool LogException(HttpContext context, long start, Exception ex)
         {
+            //LogForErrorContext(context).Error(ex, MessageTemplate, context.Request.Method, context.Request.Path, StatusCodes.Status500InternalServerError, GetElapsedMilliseconds(start, Stopwatch.GetTimestamp()));
             LogForErrorContext(context).Error(ex, MessageTemplate, context.Request.Method, context.Request.Path, StatusCodes.Status500InternalServerError, GetElapsedMilliseconds(start, Stopwatch.GetTimestamp()));
             return false;
         }

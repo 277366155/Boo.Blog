@@ -55,5 +55,13 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Boo.Blog.HttpApi.Controllers.HelloWorldController.CacheSet(System.String,System.String)">
+            <summary>
+            缓存测试
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

@@ -7,5 +7,6 @@ namespace Boo.Blog.Application.HelloWorld
     public interface IHelloWorldService
     {
         string HelloWorld();
+        bool CacheTest(string key, string value);
     }
 }

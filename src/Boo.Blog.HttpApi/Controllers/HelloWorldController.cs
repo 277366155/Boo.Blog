@@ -1,6 +1,10 @@
 using Boo.Blog.Application.HelloWorld;
 using Boo.Blog.Consts;
+using Boo.Blog.ToolKits.Cache;
+using Boo.Blog.ToolKits.Configurations;
+using CSRedis;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace Boo.Blog.HttpApi.Controllers
 {
@@ -24,6 +28,17 @@ namespace Boo.Blog.HttpApi.Controllers
         public string HelloWorld()
         {
             return _helloWorldService.HelloWorld();
+        }
+        /// <summary>
+        /// ª∫¥Ê≤‚ ‘
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        [HttpGet("cacheSet")]
+        public bool CacheSet(string key, string value)
+        {
+            return _helloWorldService.CacheTest(key, value);
         }
     }
 }

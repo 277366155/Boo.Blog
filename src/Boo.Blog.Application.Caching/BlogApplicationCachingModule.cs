@@ -1,4 +1,7 @@
-﻿using Volo.Abp.Caching;
+﻿using Boo.Blog.ToolKits.Cache;
+using Boo.Blog.ToolKits.Configurations;
+using Microsoft.Extensions.Configuration;
+using Volo.Abp.Caching;
 using Volo.Abp.Modularity;
 
 namespace Boo.Blog.Application
@@ -11,7 +14,8 @@ namespace Boo.Blog.Application
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            base.ConfigureServices(context);
+            //base.ConfigureServices(context);
+            context.Services.AddCSRedisCore(AppSettings.Root.GetSection("Redis").Get<RedisHandlerOption>());
         }
     }
 }
