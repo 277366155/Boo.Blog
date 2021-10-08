@@ -1,5 +1,7 @@
 ﻿using Boo.Blog.ToolKits.Cache;
 using System.Threading.Tasks;
+using Autofac.Extras.DynamicProxy;
+using Boo.Blog.ToolKits.Interceptor;
 using Volo.Abp.Application.Services;
 
 namespace Boo.Blog.Application.HelloWorld
