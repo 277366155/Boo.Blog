@@ -1,4 +1,6 @@
-﻿using Volo.Abp.Application.Services;
+﻿using Autofac.Extras.DynamicProxy;
+using Boo.Blog.ToolKits.Interceptor;
+using Volo.Abp.Application.Services;
 
 namespace Boo.Blog.Application.HelloWorld
 {

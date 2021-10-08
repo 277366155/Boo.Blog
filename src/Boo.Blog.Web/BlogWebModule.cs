@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.ExceptionHandling;
@@ -48,7 +49,7 @@ namespace Boo.Blog.Web
             context.Services.AddAuthorization();
             //×¢ÈëIHttpClientFactory
             context.Services.AddHttpClient();
-
+            //context.Services.AddSingleton<ILogger>();
             //ÒÆ³ýAbpExceptionFilter
             Configure<MvcOptions>(opt =>
             {

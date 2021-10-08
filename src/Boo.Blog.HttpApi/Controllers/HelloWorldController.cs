@@ -1,10 +1,6 @@
 using Boo.Blog.Application.HelloWorld;
 using Boo.Blog.Consts;
-using Boo.Blog.ToolKits.Cache;
-using Boo.Blog.ToolKits.Configurations;
-using CSRedis;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 
 namespace Boo.Blog.HttpApi.Controllers
 {
