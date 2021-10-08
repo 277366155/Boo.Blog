@@ -1,13 +1,15 @@
-﻿using Volo.Abp.Application.Services;
+﻿using Boo.Blog.ToolKits.Cache;
+using System.Threading.Tasks;
+using Volo.Abp.Application.Services;
 
 namespace Boo.Blog.Application.HelloWorld
 {
     public class HelloWorldService : ApplicationService, IHelloWorldService
     {
 
-        public string  HelloWorld()
+        public async Task<string> HelloWorld()
         {
-            return "hello world.";
+            return await  RedisHandler.TryToGetFromCacheAsync("helloworldkey", 60 * 10, () =>{return "hello world."; });
         }
         public bool CacheTest(string key, string value)
         {

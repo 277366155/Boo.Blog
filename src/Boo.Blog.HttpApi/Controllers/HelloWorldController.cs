@@ -5,6 +5,7 @@ using Boo.Blog.ToolKits.Configurations;
 using CSRedis;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using System.Threading.Tasks;
 
 namespace Boo.Blog.HttpApi.Controllers
 {
@@ -25,9 +26,9 @@ namespace Boo.Blog.HttpApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public string HelloWorld()
+        public async Task<string> HelloWorld()
         {
-            return _helloWorldService.HelloWorld();
+            return await  _helloWorldService.HelloWorld();
         }
         /// <summary>
         /// ª∫¥Ê≤‚ ‘
