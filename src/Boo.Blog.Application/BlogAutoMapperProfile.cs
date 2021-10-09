@@ -26,10 +26,13 @@ namespace Boo.Blog
                 .ForMember(d => d.PageIndex, opt => opt.Ignore())
                 .ForMember(d => d.PageCount, opt => opt.Ignore())
                 .ForMember(d => d.PageSize, opt => opt.Ignore())
-                .ForMember(d => d.Items, opt => opt.MapFrom(s=>(s.Items as IEnumerable<IEntityDto>).ToList()));
+                .ForMember(d => d.Items, opt => opt.MapFrom(s => (s.Items as IEnumerable<IEntityDto>).ToList()));
 
+            CreateMap<Post, PostFullInfoDto>()
+                .ForMember(d => d.FriendLinks, opt => opt.Ignore())
+                .ForMember(d => d.CategoryInfo, opt => opt.Ignore())
+                .ForMember(d => d.Tags, opt => opt.Ignore());
         }
-
     }
 
     public class PageConvert<T> : ITypeConverter<PagedResultDto<T>, PageResult<T>>
@@ -39,8 +42,8 @@ namespace Boo.Blog
         public PageResult<T> Convert(PagedResultDto<T> source, PageResult<T> destination, ResolutionContext context)
         {
             destination = destination ?? new PageResult<T>();
-            destination.Items =(source.Items as IEnumerable<T>).ToList();
-            destination.TotalCount= (int)source.TotalCount;
+            destination.Items = (source.Items as IEnumerable<T>).ToList();
+            destination.TotalCount = (int)source.TotalCount;
 
             return destination;
         }

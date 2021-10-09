@@ -1,6 +1,4 @@
 ﻿using Boo.Blog.Application;
-using Boo.Blog.Application.HelloWorld;
-using Boo.Blog.ToolKits.Interceptor;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Application.Services;
 using Volo.Abp.AutoMapper;
@@ -24,16 +22,15 @@ namespace Boo.Blog
                 opt.AddMaps<BlogApplicationModule>(validate: true);
                 opt.AddProfile<BlogAutoMapperProfile>(validate: true);
             });
-            context.Services.AddSingleton(typeof(UnitOfWorkInterceptor));
+            context.Services.AddSingleton(typeof(ApplicationInterceptor));
             context.Services.OnRegistred(register =>
             {
                 // 添加拦截器
-                if (typeof(ApplicationService) == register.ImplementationType.BaseType)
+                if (register.ImplementationType.BaseType==typeof(ApplicationService) || register.ImplementationType.BaseType.Name.Equals("ServiceBase`3"))
                 {
-                register.Interceptors.Add<UnitOfWorkInterceptor>();
+                    register.Interceptors.Add<ApplicationInterceptor>();
                 }
             });
         }
-
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Boo.Blog.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiExplorerSettings(GroupName = SwaggerGrouping.GroupNameV2)]
     public class BlogController : ApiBaseController
     {
@@ -54,10 +54,16 @@ namespace Boo.Blog.Controllers
             return Json(data);
         }
 
-        [HttpGet("test")]
-        public async Task<IActionResult> Test()
+        /// <summary>
+        ///获取博客详情
+        /// </summary>
+        /// <param name="id">博客id</param>
+        /// <returns></returns>
+        [HttpGet("GetBlogInfo/{id}")]
+        public async Task<IActionResult> Test(long id)
         {
-            throw new System.Exception("test exception.");
+            var data =await _blogService.GetPostFullInfoAsync(id);
+            return Json(data);
         }
     }
 }

@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="HelloWorld\Impl\**" />
+    <EmbeddedResource Remove="HelloWorld\Impl\**" />
+    <None Remove="HelloWorld\Impl\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Autofac.Extras.DynamicProxy" Version="6.0.0" />
     <PackageReference Include="Castle.Windsor" Version="5.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.2.0" />
@@ -16,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Boo.Blog.Application.Caching\Boo.Blog.Application.Caching.csproj" />
     <ProjectReference Include="..\Boo.Blog.EntityFrameworkCore\Boo.Blog.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\Boo.Blog.MongoDB\Boo.Blog.MongoDB.csproj" />
   </ItemGroup>
 
 </Project>

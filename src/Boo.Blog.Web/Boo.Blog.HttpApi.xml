@@ -44,6 +44,13 @@
             <param name="page"></param>
             <returns></returns>
         </member>
+        <member name="M:Boo.Blog.Controllers.BlogController.Test(System.Int64)">
+             <summary>
+            获取博客详情
+             </summary>
+             <param name="id">博客id</param>
+             <returns></returns>
+        </member>
         <member name="T:Boo.Blog.HttpApi.Controllers.HelloWorldController">
             <summary>
             测试swagger文档
