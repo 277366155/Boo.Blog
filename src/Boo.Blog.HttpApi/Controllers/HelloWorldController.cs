@@ -1,7 +1,6 @@
-using Boo.Blog.Application.HelloWorld;
 using Boo.Blog.Consts;
+using Boo.Blog.HelloWorld;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
 
 namespace Boo.Blog.HttpApi.Controllers
