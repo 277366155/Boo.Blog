@@ -24,8 +24,7 @@ namespace Boo.Blog.EntityFrameworkCore
         {
             context.Services.AddAbpDbContext<BlogDbContext>(options =>
             {
-                /* Remove "includeAllEntities: true" to create
-                 * default repositories only for aggregate roots */
+                /* Remove "includeAllEntities: true" to create default repositories only for aggregate roots */
                 options.AddDefaultRepositories(includeAllEntities: true);
             });
 

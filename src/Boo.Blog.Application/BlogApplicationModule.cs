@@ -22,7 +22,7 @@ namespace Boo.Blog
                 opt.AddMaps<BlogApplicationModule>(validate: true);
                 opt.AddProfile<BlogAutoMapperProfile>(validate: true);
             });
-            context.Services.AddSingleton(typeof(ApplicationInterceptor));
+            //context.Services.AddSingleton(typeof(ApplicationInterceptor));
             context.Services.OnRegistred(register =>
             {
                 // 添加拦截器

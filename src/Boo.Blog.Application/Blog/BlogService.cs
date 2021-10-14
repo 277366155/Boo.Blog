@@ -27,6 +27,7 @@ namespace Boo.Blog.Application.Blog
             _tagRepository = tagRepository;
             _postTagRepository = postTagRepository;
         }
+        
 
         /// <summary>
         /// 获取博客完整信息
