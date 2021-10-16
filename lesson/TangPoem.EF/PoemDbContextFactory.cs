@@ -17,12 +17,5 @@ namespace TangPoem.EF
                  .UseMySql(conn, ServerVersion.AutoDetect(conn));
             return new PoemDbContext(builder.Options);
         }
-
-        //public PoemDbContext CreateDbContext(string[] args)
-        //{
-        //    using var app = AbpApplicationFactory.Create<PoemEFModule>();
-        //    var service = app.ServiceProvider.GetService<PoemDbContext>();
-        //    return service;
-        //}
     }
 }

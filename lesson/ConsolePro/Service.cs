@@ -1,19 +1,32 @@
-﻿using System;
+﻿using Boo.Blog.ToolKits.Extensions;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TangPoem.Application.Poems;
 using TangPoem.Core.Poems;
-using TangPoem.EF.Repositories;
+using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
+using Volo.Abp.Uow;
 
 namespace ConsolePro
 {
     public class Service : ApplicationService
     {
-        IPoemRepository _poetRepository;
-        public Service(IPoemRepository poetRepository)
+        //IRepository<Poet> _poetRepository;
+        //IUnitOfWorkManager _uowManager;
+        //public Service(IRepository<Poet> poetRepository, IUnitOfWorkManager uowManager)
+        //{
+        //    _poetRepository = poetRepository;
+        //    _uowManager = uowManager;
+        //}
+
+        IPoemApplicationService _poemService;
+        public Service(IPoemApplicationService poemService)
         {
-            _poetRepository = poetRepository;
+            _poemService = poemService;
         }
 
         public void HelloWorld()
@@ -21,19 +34,43 @@ namespace ConsolePro
             Console.WriteLine("Hello world.");
         }
 
-        public void GetFirstPoetName()
+        public IEnumerable<PoetDto> PagedData()
         {
-            //Console.WriteLine(_poetRepository.FirstOrDefault()?.Name);
-            var newData = new Poet { Name = "托尔斯泰", Description = Guid.NewGuid().ToString("N") };
-            var result = _poetRepository.Insert(newData);
-            Console.WriteLine($"\r\n{result.Id}\r\n");
+            var data = _poemService.GetPagedPoets(new PagedResultRequestDto
+            {
+                 SkipCount=0,
+                  MaxResultCount=10
+            });
+            return data.Items;
         }
 
-        public async Task<Poet> AddNewDataAsync()
+        public void GetPoemOfCategory(long id)
         {
-            var newData = new Poet { Name = "托尔斯泰", Description = Guid.NewGuid().ToString("N") };
-            var data = await _poetRepository.InsertAsync(newData);
-            return data;
+            var data =_poemService.GetPoemOfCategory(id);
+            foreach (var d in data)
+            {
+                Console.WriteLine(d.ToJson());
+            }
         }
+        //public void GetPoetList()
+        //{
+        //    using var uow = _uowManager.Begin(new AbpUnitOfWorkOptions());
+
+        //    var poets = _poetRepository.AsQueryable().ToList();
+        //    Console.WriteLine(poets.ToJson());
+
+        //}
+        //public Poet GetOne()
+        //{
+        //    using var uow = _uowManager.Begin(new AbpUnitOfWorkOptions());
+        //    var data = _poetRepository.Include(a => a.Poems).FirstOrDefault();
+        //    return data;
+        //}
+        //public async Task<Poet> AddNewDataAsync()
+        //{
+        //    var newData = new Poet { Name = "托尔斯泰", Description = Guid.NewGuid().ToString("N") };
+        //    var data = await _poetRepository.InsertAsync(newData);
+        //    return data;
+        //}
     }
 }
