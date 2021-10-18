@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TangPoem.Application.Poems.Dto;
+using TangPoem.Core.IRepositories;
 using TangPoem.Core.Poems;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
@@ -13,13 +15,13 @@ namespace TangPoem.Application.Poems
     public class PoemApplicationService : ApplicationService, IPoemApplicationService
     {
         IRepository<Poet> _poetRepository;
-        IRepository<Poem> _poemRepository;
+        IPoemRepository _poemRepository;
         IRepository<Category> _categoryRepository;
-        IRepository<CategoryPoem> _categoryPoemRepository;
+        ICategoryPoemRepository _categoryPoemRepository;
         public PoemApplicationService(IRepository<Poet> poetRepository
-            , IRepository<Poem> poemRepository
+            , IPoemRepository poemRepository
             , IRepository<Category> categoryRepository
-            , IRepository<CategoryPoem> categoryPoemRepository)
+            , ICategoryPoemRepository categoryPoemRepository)
         {
             _poetRepository = poetRepository;
             _poemRepository = poemRepository;
@@ -52,19 +54,19 @@ namespace TangPoem.Application.Poems
             }
             else
             {
-              var data=await   _poetRepository.InsertAsync(ObjectMapper.Map<PoetDto, Poet>(poet));
-                return ObjectMapper.Map<Poet,PoetDto>(data);
+                var data = await _poetRepository.InsertAsync(ObjectMapper.Map<PoetDto, Poet>(poet));
+                return ObjectMapper.Map<Poet, PoetDto>(data);
             }
         }
 
         public void DeleteCategory(CategoryDto category)
         {
-            _categoryRepository.DeleteAsync(a=>a.Id.Equals(category.Id)).Wait();
+            _categoryRepository.DeleteAsync(a => a.Id.Equals(category.Id)).Wait();
         }
 
         public List<CategoryDto> GetAllCategories()
         {
-            var data=_categoryRepository.ToList();
+            var data = _categoryRepository.ToList();
             return ObjectMapper.Map<List<Category>, List<CategoryDto>>(data);
         }
 
@@ -77,15 +79,15 @@ namespace TangPoem.Application.Poems
         public List<CategoryDto> GetCategories(long poemId)
         {
             var data = _categoryPoemRepository.Where(a => a.PoemId.Equals(poemId)).ToList();
-            var result = _categoryRepository.Where(a=>data.Any(b=>b.CategoryId.Equals(a.Id))).ToList();
+            var result = _categoryRepository.Where(a => data.Any(b => b.CategoryId.Equals(a.Id))).ToList();
             return ObjectMapper.Map<List<Category>, List<CategoryDto>>(result);
         }
 
         public PagedResultDto<PoemDto> GetPagedPoems(PagedResultRequestDto param)
         {
             var data = _poemRepository.OrderBy(a => a.Id).PageBy(param).ToList();
-            var count=_poemRepository.Count();
-            return new PagedResultDto<PoemDto> { Items=ObjectMapper.Map<List<Poem>,List<PoemDto>>(data), TotalCount=count };
+            var count = _poemRepository.Count();
+            return new PagedResultDto<PoemDto> { Items = ObjectMapper.Map<List<Poem>, List<PoemDto>>(data), TotalCount = count };
         }
 
         public PagedResultDto<PoetDto> GetPagedPoets(PagedResultRequestDto paged)
@@ -102,14 +104,24 @@ namespace TangPoem.Application.Poems
 
         public List<PoemDto> GetPoemOfCategory(long categoryId)
         {
-            var poemIds = _categoryPoemRepository.Where(a=>a.CategoryId.Equals(categoryId))?.Select(a=>a.PoemId).ToList();
-            var data = _poemRepository.Where(a=>poemIds.Contains(a.Id)).ToList();
-            return ObjectMapper.Map<List<Poem>,List<PoemDto>>(data);
+            var poemIds = _categoryPoemRepository.Where(a => a.CategoryId.Equals(categoryId))?.Select(a => a.PoemId).ToList();
+            var data = _poemRepository.Where(a => poemIds.Contains(a.Id)).ToList();
+            return ObjectMapper.Map<List<Poem>, List<PoemDto>>(data);
         }
 
         public void RemovePoemFromCategory(CategoryPoemDto categoryPoem)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<PagedResultDto<PoemDto>> SearchPoemsAsync(SearchPoemDto param)
+        {
+            var data = await _poemRepository.GetPagedPoemsAsync(param.MaxResultCount, param.Skip, param.Author, param.Keyword, param.Categories);
+            return new PagedResultDto<PoemDto>()
+            {
+                TotalCount = data.Item2,
+                Items = ObjectMapper.Map<List<Poem>, List<PoemDto>>(data.Item1)
+            };
         }
     }
 

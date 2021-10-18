@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using TangPoem.Application.Poems.Dto;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 
@@ -12,7 +13,7 @@ namespace TangPoem.Application.Poems
         PagedResultDto<PoetDto> GetPagedPoets(PagedResultRequestDto paged);
         //PagedResultDto<PoetDto> SearchPoets(SearchPoetDto param);
         PagedResultDto<PoemDto> GetPagedPoems(PagedResultRequestDto param);
-        //PagedResultDto<PoemDto>  SearchPoems(SearchPoemsDto param);
+        Task<PagedResultDto<PoemDto>> SearchPoemsAsync(SearchPoemDto param);
         Task<CategoryDto> AddCategoryAsync(CategoryDto category);
         void DeleteCategory(CategoryDto category);
         List<CategoryDto> GetAllCategories();

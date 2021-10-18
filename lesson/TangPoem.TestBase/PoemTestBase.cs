@@ -5,9 +5,8 @@ using Volo.Abp;
 using Volo.Abp.Modularity;
 using Volo.Abp.Testing;
 using Volo.Abp.Uow;
-using Xunit;
 
-namespace TangPoem.Application.Test
+namespace TangPoem.Application.TestBase
 {
     public abstract class PoemTestBase<TStartupModule> : AbpIntegratedTest<TStartupModule> where TStartupModule : IAbpModule
     {

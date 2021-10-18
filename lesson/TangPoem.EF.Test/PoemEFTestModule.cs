@@ -1,41 +1,28 @@
-﻿using Microsoft.Data.Sqlite;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using TangPoem.Application.TestBase;
-using TangPoem.EF;
 using Volo.Abp;
-using Volo.Abp.Autofac;
-using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.Sqlite;
 using Volo.Abp.Modularity;
-using Volo.Abp.Threading;
+using Xunit;
 
-namespace TangPoem.Application.Test
+namespace TangPoem.EF.Test
 {
-    [DependsOn(typeof(PoemTestBaseModule),
-        typeof(PoemApplicationModule),
+    [DependsOn(typeof(PoemEFModule),
+        typeof(PoemTestBaseModule),
         typeof(AbpEntityFrameworkCoreSqliteModule))]
-    public class PoemApplicationTestModule : AbpModule
+    public class PoemEFTestModule : AbpModule
     {
         SqliteConnection _sqliteConnection;
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             ConfigureInMemorySqlite(context.Services);
         }
-
-        public override void OnApplicationInitialization(ApplicationInitializationContext context)
-        {
-            //程序初始化阶段，执行种子数据插入
-            AsyncHelper.RunSync(async () =>
-            {
-                using var scope = context.ServiceProvider.CreateScope();
-                await scope.ServiceProvider.GetRequiredService<IDataSeeder>().SeedAsync();
-            });
-        }
-
         public override void OnApplicationShutdown(ApplicationShutdownContext context)
         {
             _sqliteConnection.Dispose();

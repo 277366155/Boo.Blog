@@ -43,7 +43,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TangPoem.EF", "lesson\TangP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TangPoem.Application", "lesson\TangPoem.Application\TangPoem.Application.csproj", "{FD574B71-BD8C-4633-9F96-724472AA32BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TangPoem.Application.Test", "lesson\TangPoem.Application.Test\TangPoem.Application.Test.csproj", "{87460B30-D3F7-48DF-B21B-3816A6375970}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TangPoem.Application.Test", "lesson\TangPoem.Application.Test\TangPoem.Application.Test.csproj", "{87460B30-D3F7-48DF-B21B-3816A6375970}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TangPoem.TestBase", "lesson\TangPoem.TestBase\TangPoem.TestBase.csproj", "{378BBFAA-8893-41CB-9A4D-802999E7778F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TangPoem.EF.Test", "lesson\TangPoem.EF.Test\TangPoem.EF.Test.csproj", "{493966EA-B0DF-40E0-87FA-B17AB3AAF318}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TangPoem.Web", "lesson\TangPoem.Web\TangPoem.Web.csproj", "{63D71783-3894-4F46-82AA-0D7967A03FD6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -123,6 +129,18 @@ Global
 		{87460B30-D3F7-48DF-B21B-3816A6375970}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87460B30-D3F7-48DF-B21B-3816A6375970}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87460B30-D3F7-48DF-B21B-3816A6375970}.Release|Any CPU.Build.0 = Release|Any CPU
+		{378BBFAA-8893-41CB-9A4D-802999E7778F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{378BBFAA-8893-41CB-9A4D-802999E7778F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{378BBFAA-8893-41CB-9A4D-802999E7778F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{378BBFAA-8893-41CB-9A4D-802999E7778F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{493966EA-B0DF-40E0-87FA-B17AB3AAF318}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{493966EA-B0DF-40E0-87FA-B17AB3AAF318}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{493966EA-B0DF-40E0-87FA-B17AB3AAF318}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{493966EA-B0DF-40E0-87FA-B17AB3AAF318}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63D71783-3894-4F46-82AA-0D7967A03FD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63D71783-3894-4F46-82AA-0D7967A03FD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63D71783-3894-4F46-82AA-0D7967A03FD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63D71783-3894-4F46-82AA-0D7967A03FD6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -146,6 +164,9 @@ Global
 		{BEAEEE97-03C4-46F0-937B-BD40EAF86551} = {F19217A8-47EC-4E9D-82E9-1FDC450A846B}
 		{FD574B71-BD8C-4633-9F96-724472AA32BF} = {F19217A8-47EC-4E9D-82E9-1FDC450A846B}
 		{87460B30-D3F7-48DF-B21B-3816A6375970} = {F19217A8-47EC-4E9D-82E9-1FDC450A846B}
+		{378BBFAA-8893-41CB-9A4D-802999E7778F} = {F19217A8-47EC-4E9D-82E9-1FDC450A846B}
+		{493966EA-B0DF-40E0-87FA-B17AB3AAF318} = {F19217A8-47EC-4E9D-82E9-1FDC450A846B}
+		{63D71783-3894-4F46-82AA-0D7967A03FD6} = {F19217A8-47EC-4E9D-82E9-1FDC450A846B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {28315BFD-90E7-4E14-A2EA-F3D23AF4126F}
