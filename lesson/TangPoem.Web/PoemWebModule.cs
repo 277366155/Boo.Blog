@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using MySqlConnector;
 using System;
 using System.Collections.Generic;
@@ -35,6 +36,15 @@ namespace TangPoem.Web
                     c.DbContextOptions.UseMySql(conn, ServerVersion.AutoDetect(conn));
                 });
             });
+
+            Configure<AbpAspNetCoreMvcOptions>(opt=> {
+                opt.ConventionalControllers.Create(typeof(PoemApplicationModule).Assembly);
+            });
+            context.Services.AddSwaggerGen(opt=> {
+                opt.SwaggerDoc("v1",new OpenApiInfo { Title="TangPoem Api",Version="v1" });
+                opt.DocInclusionPredicate((docName,des)=>true);
+                opt.CustomSchemaIds(type=>type.FullName);
+            });
         }
 
         public override void OnApplicationInitialization(ApplicationInitializationContext context)
@@ -52,6 +62,10 @@ namespace TangPoem.Web
 
             app.UseStaticFiles();
             app.UseRouting();
+            app.UseSwagger();
+            app.UseSwaggerUI(opt=> {
+                opt.SwaggerEndpoint("/swagger/v1/swagger.json","TangPoem Api");
+            });
             app.UseConfiguredEndpoints();
         }
     }

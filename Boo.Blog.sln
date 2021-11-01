@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31410.414
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boo.Blog.Web", "src\Boo.Blog.Web\Boo.Blog.Web.csproj", "{068855E8-9240-4F1A-910B-CF825794513B}"
 EndProject
@@ -45,11 +45,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TangPoem.Application", "les
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TangPoem.Application.Test", "lesson\TangPoem.Application.Test\TangPoem.Application.Test.csproj", "{87460B30-D3F7-48DF-B21B-3816A6375970}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TangPoem.TestBase", "lesson\TangPoem.TestBase\TangPoem.TestBase.csproj", "{378BBFAA-8893-41CB-9A4D-802999E7778F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TangPoem.TestBase", "lesson\TangPoem.TestBase\TangPoem.TestBase.csproj", "{378BBFAA-8893-41CB-9A4D-802999E7778F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TangPoem.EF.Test", "lesson\TangPoem.EF.Test\TangPoem.EF.Test.csproj", "{493966EA-B0DF-40E0-87FA-B17AB3AAF318}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TangPoem.EF.Test", "lesson\TangPoem.EF.Test\TangPoem.EF.Test.csproj", "{493966EA-B0DF-40E0-87FA-B17AB3AAF318}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TangPoem.Web", "lesson\TangPoem.Web\TangPoem.Web.csproj", "{63D71783-3894-4F46-82AA-0D7967A03FD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TangPoem.Web", "lesson\TangPoem.Web\TangPoem.Web.csproj", "{63D71783-3894-4F46-82AA-0D7967A03FD6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbotSpider", "test\AbotSpider\AbotSpider.csproj", "{1F3FDE8C-CAC9-43B7-A3E2-CCD585E7E60A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -141,6 +143,10 @@ Global
 		{63D71783-3894-4F46-82AA-0D7967A03FD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63D71783-3894-4F46-82AA-0D7967A03FD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63D71783-3894-4F46-82AA-0D7967A03FD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F3FDE8C-CAC9-43B7-A3E2-CCD585E7E60A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F3FDE8C-CAC9-43B7-A3E2-CCD585E7E60A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F3FDE8C-CAC9-43B7-A3E2-CCD585E7E60A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F3FDE8C-CAC9-43B7-A3E2-CCD585E7E60A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -167,6 +173,7 @@ Global
 		{378BBFAA-8893-41CB-9A4D-802999E7778F} = {F19217A8-47EC-4E9D-82E9-1FDC450A846B}
 		{493966EA-B0DF-40E0-87FA-B17AB3AAF318} = {F19217A8-47EC-4E9D-82E9-1FDC450A846B}
 		{63D71783-3894-4F46-82AA-0D7967A03FD6} = {F19217A8-47EC-4E9D-82E9-1FDC450A846B}
+		{1F3FDE8C-CAC9-43B7-A3E2-CCD585E7E60A} = {04DBDB01-70F4-4E06-B468-8F87850B22BE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {28315BFD-90E7-4E14-A2EA-F3D23AF4126F}

@@ -3,10 +3,8 @@ using Microsoft.AspNetCore.Http.Features;
 using Serilog;
 using Serilog.Events;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Boo.Blog.Middleware
@@ -46,12 +44,10 @@ namespace Boo.Blog.Middleware
                 log.Write(level, MessageTemplate, context.Request.Method, GetPath(context), statusCode, GetElapsedMilliseconds(start, Stopwatch.GetTimestamp()));
             }
             catch (Exception ex) when (LogException(context, start, ex)) { }
-
         }
 
         static bool LogException(HttpContext context, long start, Exception ex)
-        {
-            //LogForErrorContext(context).Error(ex, MessageTemplate, context.Request.Method, context.Request.Path, StatusCodes.Status500InternalServerError, GetElapsedMilliseconds(start, Stopwatch.GetTimestamp()));
+        {            
             LogForErrorContext(context).Error(ex, MessageTemplate, context.Request.Method, context.Request.Path, StatusCodes.Status500InternalServerError, GetElapsedMilliseconds(start, Stopwatch.GetTimestamp()));
             return false;
         }
