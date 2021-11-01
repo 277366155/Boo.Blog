@@ -1,13 +1,10 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using TangPoem.Application.Poems;
 using TangPoem.Core.Poems;
 
 namespace TangPoem.Application
 {
-   public  class PoemApplicationAutoMapperProfile:Profile
+    public  class PoemApplicationAutoMapperProfile:Profile
     {
         public PoemApplicationAutoMapperProfile()
         {

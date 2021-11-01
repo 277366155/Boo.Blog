@@ -1,6 +1,7 @@
 ﻿using Abot2.Core;
 using Abot2.Crawler;
 using Abot2.Poco;
+using AbotSpider.Service;
 using Serilog;
 using System;
 using System.Threading.Tasks;
@@ -11,15 +12,16 @@ namespace AbotSpider
     {
         static async Task Main(string[] args)
         {
-            Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Information()
-                .WriteTo.Console()
-                .CreateLogger();
+            //Log.Logger = new LoggerConfiguration()
+            //    .MinimumLevel.Information()
+            //    .WriteTo.Console()
+            //    .CreateLogger();
 
-            Log.Logger.Information("Demo starting up!");
+            //Log.Logger.Information("Demo starting up!");
 
-            await DemoSimpleCrawler();
-            await DemoSinglePageRequest();
+            ////await DemoSimpleCrawler();
+            //await DemoSinglePageRequest();
+            GushiwenCrawler.LoadHtml();
             Console.ReadLine();
         }
 
