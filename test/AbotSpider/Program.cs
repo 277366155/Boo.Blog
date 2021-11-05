@@ -21,7 +21,7 @@ namespace AbotSpider
 
             ////await DemoSimpleCrawler();
             //await DemoSinglePageRequest();
-            GushiwenCrawler.LoadHtml();
+            await GushiwenCrawler.StartAsync();
             Console.ReadLine();
         }
 
