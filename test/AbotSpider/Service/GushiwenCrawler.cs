@@ -26,6 +26,10 @@ namespace AbotSpider.Service
             }
             foreach (var kv in kvs)
             {
+                if (!TypeXpathDic.Keys.Contains(kv.Key))
+                {
+                    continue;
+                }
                 var typeLinks=await LoadTypeLinkAsync(kv.Value);
                 foreach (var link in typeLinks)
                 {
@@ -48,7 +52,7 @@ namespace AbotSpider.Service
 
             var titleXpath = "//div[@class='right']//div[@class='sons']/div[@class='title']";
             var node2=doc.DocumentNode.SelectNodes(titleXpath);
-            var titleList = node.Where(a => a.GetAttributeValue("target", "") == "").Select(a=>a.InnerText).ToList();
+            var titleList = node2.Where(a => a.GetAttributeValue("target", "") == "").Select(a=>a.InnerText.Replace("\n","")).ToList();
 
             var result = new Dictionary<string,string>();
             for (var i = 0; i < linkList.Count; i++)
