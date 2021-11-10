@@ -9,8 +9,8 @@ namespace AbotSpider.Service
 {
     public class GushiwenCrawler
     {
-        static string host = "https://so.gushiwen.cn/";
-        static Dictionary<string,string> TypeXpathDic= new Dictionary<string,string>();
+        static string host = "https://so.gushiwen.cn";
+        static Dictionary<string, string> TypeXpathDic = new Dictionary<string, string>();
         static GushiwenCrawler()
         {
             TypeXpathDic.Add("诗文", "//div[@class='left']/div[@class='sons']/div[@class='typecont']/span/a");
@@ -19,63 +19,97 @@ namespace AbotSpider.Service
 
         public static async Task StartAsync()
         {
-            var kvs = await GetMoreLinkAsync();
-            if (kvs == null)
-            {
-                return;
-            }
-            foreach (var kv in kvs)
-            {
-                if (!TypeXpathDic.Keys.Contains(kv.Key))
-                {
-                    continue;
-                }
-                var typeLinks=await LoadTypeLinkAsync(kv.Value);
-                foreach (var link in typeLinks)
-                {
-                    Console.WriteLine(link);
-                }
-            }
+            await LoadShiwenAsync();
         }
 
+
+        #region 诗文页面爬取
         /// <summary>
-        /// 获取首页右侧所有的“更多”的类型名称与链接地址
+        ///https://so.gushiwen.cn/shiwens/， 抓取页面右侧类型链接
         /// </summary>
-        /// <returns></returns>
-        public static async Task<Dictionary<string,string>> GetMoreLinkAsync()
+        public static async Task<List<string>> LoadShiwenDepth1Async()
         {
-            string homeUrl = "https://www.gushiwen.cn/";
-            var doc = await  new HtmlWeb().LoadFromWebAsync(homeUrl);
-            var xpath = "//div[@class='right']//div[@class='sons']//div[@class='cont']/a";
-            var node = doc.DocumentNode.SelectNodes(xpath);
-            var linkList = node.Where(a => a.GetAttributeValue("target", "") == "").Select(a => a.GetAttributeValue("href", ""))?.ToList();
+            var url = "https://so.gushiwen.cn/shiwens/";
+            var doc = await new HtmlWeb().LoadFromWebAsync(url);
+            var currentTypeXpath = $"//div[@class='right']//div[@id='right1']/div[@class='cont']/a";
 
-            var titleXpath = "//div[@class='right']//div[@class='sons']/div[@class='title']";
-            var node2=doc.DocumentNode.SelectNodes(titleXpath);
-            var titleList = node2.Where(a => a.GetAttributeValue("target", "") == "").Select(a=>a.InnerText.Replace("\n","")).ToList();
+            var nodes = doc.DocumentNode.SelectNodes(currentTypeXpath);
 
-            var result = new Dictionary<string,string>();
-            for (var i = 0; i < linkList.Count; i++)
-            {
-                result.Add(titleList[i],linkList[i]);
-            }
-            return result;
+            //Console.WriteLine("类目：" + doc.DocumentNode.SelectNodes(currentTypeXpath).Select(a => a.InnerText).ToJson());
+
+            return nodes.Select(a => host + a.GetAttributeValue("href", "")).ToList();
         }
-
         /// <summary>
-        /// 在各个“更多”子页面抓取右侧所有类型链接
+        /// 爬取诗文二级页面中的链接，如 https://so.gushiwen.cn/gushi/sanbai.aspx 
         /// </summary>
         /// <param name="url"></param>
-        public static async Task< List<string>> LoadTypeLinkAsync(string url)
+        /// <returns></returns>
+        public static async Task<List<KeyValuePair<string, string>>> LoadShiwenDepth2Async(string url)
         {
-            var doc =await  new HtmlWeb().LoadFromWebAsync(url);  
-            var currentTypeXpath = $"//div[@class='right']//div[@class='sons']/div[@class='cont']/a";
+            var linkXpath = "//div[@class='left']//div[@class='sons']//span/a";
+            var doc = await new HtmlWeb().LoadFromWebAsync(url);
+            var nodes = doc.DocumentNode.SelectNodes(linkXpath);
+            return nodes.Select(a => KeyValuePair.Create(a.InnerText, host + a.GetAttributeValue("href", ""))).ToList();
+        }
+
+        /// <summary>
+        /// 爬取作者，朝代，正文
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public static async Task LoadShiwenDepth3Async(string url)
+        {
+            //todo：判断url是否存在于列表，存在则不再爬取
+            var doc = await new HtmlWeb().LoadFromWebAsync(url);
+            var node = doc.DocumentNode;
+            var authorXpath = "//div[@id='sonsyuanwen']//a[1]";
+            var dynastyXpath = "//div[@id='sonsyuanwen']//a[2]";
+            var contentXpath = "//div[@id='sonsyuanwen']//div[@class='contson']";
+            
+           var author= node.SelectSingleNode(authorXpath).InnerText;
+            var dynasty = node.SelectSingleNode(dynastyXpath).InnerText;
+            var content = node.SelectSingleNode(contentXpath).InnerText;
+
+            //todo1：insert into dbtable
+            //todo2：记录当前url到列表中
+            Console.WriteLine(author+dynasty);
+            Console.WriteLine(content);
+        }
+
+        public static async Task LoadShiwenAsync()
+        {
+            var list = await LoadShiwenDepth1Async();
+            foreach (var li in list)
+            {
+                var aLinkInfos = await LoadShiwenDepth2Async(li);
+                foreach (var info in aLinkInfos)
+                {
+                    await LoadShiwenDepth3Async(info.Value);
+                }
+            }
+        }
+
+
+        #endregion 诗文页面爬取
+
+        /// <summary>
+        /// 抓取页面中“略缩”链接
+        /// </summary>
+        /// <param name="url"></param>
+        public static async Task<List<string>> LoadTypeLinkAsync(string url)
+        {
+            var urls = new string[] {
+                "https://so.gushiwen.cn/guwen/",
+                "https://so.gushiwen.cn/authors/"
+            };
+            var doc = await new HtmlWeb().LoadFromWebAsync(url);
+            var currentTypeXpath = $"//div[@id='leftLuesuo']/div[@class='typecont']/span/a";
 
             var nodes = doc.DocumentNode.SelectNodes(currentTypeXpath);
 
             Console.WriteLine("类目：" + doc.DocumentNode.SelectNodes(currentTypeXpath).Select(a => a.InnerText).ToJson());
-            
-            return nodes.Select(a=> host + a.GetAttributeValue("href", "")).ToList();
+
+            return nodes.Select(a => host + a.GetAttributeValue("href", "")).ToList();
         }
     }
 }
