@@ -1,10 +1,15 @@
 ﻿using Abot2.Core;
 using Abot2.Crawler;
 using Abot2.Poco;
-using AbotSpider.Service;
+using AbotSpider.Crawlers;
+using Boo.Blog.ToolKits.Cache;
+using Boo.Blog.ToolKits.Configurations;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using System;
 using System.Threading.Tasks;
+using Volo.Abp;
 
 namespace AbotSpider
 {
@@ -12,16 +17,12 @@ namespace AbotSpider
     {
         static async Task Main(string[] args)
         {
-            //Log.Logger = new LoggerConfiguration()
-            //    .MinimumLevel.Information()
-            //    .WriteTo.Console()
-            //    .CreateLogger();
 
-            //Log.Logger.Information("Demo starting up!");
+            using var app = AbpApplicationFactory.Create<AbotSipderModule>(opt => opt.UseAutofac());
+            app.Initialize();
+            var service = app.ServiceProvider.GetService<GushiwenCrawler>();
+            await service.StartAsync();
 
-            ////await DemoSimpleCrawler();
-            //await DemoSinglePageRequest();
-            await GushiwenCrawler.StartAsync();
             Console.ReadLine();
         }
 
