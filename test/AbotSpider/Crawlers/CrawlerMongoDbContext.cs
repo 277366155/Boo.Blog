@@ -17,7 +17,6 @@ namespace AbotSpider.Crawlers
             modelBuilder.Entity<Poem>(b=>
             {
                 b.CollectionName = "Poems";
-
             });
         }
     }
