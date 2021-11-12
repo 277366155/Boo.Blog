@@ -61,8 +61,8 @@ namespace AbotSpider.Crawlers
             var linkXpath = "//div[@class='left']//div[@class='sons']//span/a";
             var doc = await new HtmlWeb().LoadFromWebAsync(url);
             var nodes = doc.DocumentNode.SelectNodes(linkXpath);
-
-            return nodes.Where(a => !string.IsNullOrWhiteSpace(a.GetAttributeValue("href", ""))).Select(a => KeyValuePair.Create(a.InnerText, a.GetAttributeValue("href", "").Contains("https://") ? a.GetAttributeValue("href", "") : host + a.GetAttributeValue("href", ""))).ToList();
+            
+            return nodes.Where(a=>!string.IsNullOrWhiteSpace(a.GetAttributeValue("href",""))).Select(a => KeyValuePair.Create(a.InnerText, a.GetAttributeValue("href", "").Contains("https://")? a.GetAttributeValue("href", "") : host + a.GetAttributeValue("href", ""))).ToList();
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace AbotSpider.Crawlers
             //判断url是否存在于列表，存在则不再爬取
             if (await RedisHelper.SIsMemberAsync(urlMemberKey, url))
             {
-               // Console.WriteLine($"跳过:" + GetCrawCount());
+                Console.WriteLine($"跳过:"+GetCrawCount());
                 return;
             }
 
@@ -90,10 +90,10 @@ namespace AbotSpider.Crawlers
             }
             var author = node.SelectSingleNode(authorXpath).InnerText;
             var dynasty = node.SelectSingleNode(dynastyXpath).InnerText.Replace("〔", "").Replace("〕", "");
-            var content = node.SelectSingleNode(contentXpath).InnerText.Replace("\n", "");
+            var content = node.SelectSingleNode(contentXpath).InnerText.Replace("\\n", "");
 
             //1：insert into mongoDb
-            var insertResult = await _poemRepository.InsertAsync(new Poem(Guid.NewGuid()) { Author = author, Content = content, Dynasty = dynasty, Title = title, Tags = new string[] { author, dynasty },Url= url });
+            var insertResult = await _poemRepository.InsertAsync(new Poem(Guid.NewGuid()) { Author = author, Content = content, Dynasty = dynasty, Title = title, Tags = new string[] { author, dynasty } });
             if (insertResult != null)
             {
                 //2：记录当前url到列表中
@@ -105,30 +105,15 @@ namespace AbotSpider.Crawlers
         public async Task LoadShiwenAsync()
         {
             var list = await LoadShiwenDepth1Async();
-            var taskList = new List<Task>();
-            var taskCount = 10;
-            var avgMemberCount = list.Count / taskCount;
-            for(var n=0;n< taskCount; n++)
+            foreach (var li in list)
             {
-                var currentIndex = n;
-                taskList.Add(Task.Run(async () =>
-               {
-                   var taskMemberCount = avgMemberCount;                 
-                   if (n == taskCount-1)
-                       taskMemberCount = list.Count % taskCount;
+                var aLinkInfos = await LoadShiwenDepth2Async(li);
+                foreach (var info in aLinkInfos)
+                {
 
-                   for (var i = 0; i < taskMemberCount; i++)
-                   {
-                       var aLinkInfos = await LoadShiwenDepth2Async(list[avgMemberCount* currentIndex + i]);
-                       foreach (var info in aLinkInfos)
-                       {
-                           await LoadShiwenDepth3Async(info.Key, info.Value);
-                       }
-                   }
-               }));
+                    await LoadShiwenDepth3Async(info.Key, info.Value);
+                }
             }
-            Task.WaitAll(taskList.ToArray());
-            Console.WriteLine("end..");
         }
 
         #endregion 诗文页面爬取
