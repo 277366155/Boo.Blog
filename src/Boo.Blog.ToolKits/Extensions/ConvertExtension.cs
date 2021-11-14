@@ -35,7 +35,7 @@ namespace Boo.Blog.ToolKits.Extensions
         /// <returns></returns>
         public static T ToObj<T>(this string json) where T : class
         {
-            if (!json.IsNullOrWhiteSpace())
+            if (!json.IsNullOrWhiteSpace0())
             {
                 return JsonConvert.DeserializeObject<T>(json);
             }
