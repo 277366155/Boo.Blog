@@ -25,7 +25,6 @@ namespace AbotSpider.Crawlers
     {
         public MongoDbPoemRepository(IMongoDbContextProvider<CrawlerMongoDbContext> dbContextProvider) : base(dbContextProvider)
         {
-
         }
     }
 
