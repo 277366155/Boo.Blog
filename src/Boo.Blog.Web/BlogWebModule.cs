@@ -24,6 +24,7 @@ namespace Boo.Blog.Web
         typeof(AbpAutofacModule),
         typeof(BlogHttpApiModule),
         //typeof(BlogSwaggerModule),
+        
         typeof(BlogEntityFrameworkCoreModule),
         typeof(BlogMongoDbModule)
     )]
@@ -72,7 +73,7 @@ namespace Boo.Blog.Web
             }
             app.UseRouting();
 
-            app.UseMiddleware<GloableExceptionHandlerMiddleware>();
+            //app.UseMiddleware<GloableExceptionHandlerMiddleware>();
             app.UseMiddleware<SerilogHandlerMiddleware>();
             //身份验证，必须放在UseRouting()与UseEndpoints()之间
             app.UseAuthentication();

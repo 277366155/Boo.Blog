@@ -51,6 +51,13 @@
              <param name="id">博客id</param>
              <returns></returns>
         </member>
+        <member name="M:Boo.Blog.Controllers.BlogController.Delete(System.Int32)">
+            <summary>
+            删除post
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="T:Boo.Blog.HttpApi.Controllers.HelloWorldController">
             <summary>
             测试swagger文档

@@ -43,7 +43,10 @@ namespace Boo.Blog.Application.Blog
                 return ResponseResult.IsFail<PostFullInfoDto>("数据不存在");
             }
             var postFullInfo = ObjectMapper.Map<Post, PostFullInfoDto>(post);
-            postFullInfo.CategoryInfo = await _categoryRepository.GetAsync(post.CategoryId);
+            if (post.CategoryId != 0)
+            {
+                postFullInfo.CategoryInfo = await _categoryRepository.GetAsync(post.CategoryId);
+            }
             var tagList = await _postTagRepository.GetListAsync(a => a.PostId == post.Id);
             postFullInfo.Tags = await _tagRepository.GetListAsync(a => tagList.Select(t => t.Id).Contains(a.Id));
             postFullInfo.FriendLinks = await _friendLinkRepository.GetListAsync();
@@ -54,6 +57,11 @@ namespace Boo.Blog.Application.Blog
         {
             var data = await _postRepository.GetCountAsync();
             return ResponseResult.IsSuccess(data, "ok");
+        }
+
+        public async Task DeletePostAsync(int id)
+        { 
+            await  _postRepository.DeleteAsync(id);
         }
     }
 }

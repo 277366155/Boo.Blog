@@ -11,9 +11,9 @@ namespace Boo.Blog.EntityFrameworkCore
     public class BlogDbContext : AbpDbContext<BlogDbContext>//,IIdentityDbContext        
     {
         /* Add DbSet properties for your Aggregate Roots / Entities here. */
-        
+
         #region Entities from the modules
-        
+
         ////Identity
         //public DbSet<IdentityUser> Users { get; set; }
         //public DbSet<IdentityRole> Roles { get; set; }
@@ -21,10 +21,10 @@ namespace Boo.Blog.EntityFrameworkCore
         //public DbSet<OrganizationUnit> OrganizationUnits { get; set; }
         //public DbSet<IdentitySecurityLog> SecurityLogs { get; set; }
         //public DbSet<IdentityLinkUser> LinkUsers { get; set; }
-        
+
         #endregion
-        
-        //public DbSet<Post> Posts { get; set; }
+
+        public DbSet<Post> Posts { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<PostTag> PostTags { get; set; }

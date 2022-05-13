@@ -38,7 +38,7 @@ namespace Boo.Blog.Controllers
         [HttpPost("add")]
         public async Task<IActionResult> InsertBlogAsync(PostDto input)
         {
-           var data = await _blogService.CreateAsync(input);
+            var data = await _blogService.CreateAsync(input);
             return Json(data);
         }
 
@@ -62,8 +62,19 @@ namespace Boo.Blog.Controllers
         [HttpGet("GetBlogInfo/{id}")]
         public async Task<IActionResult> Test(long id)
         {
-            var data =await _blogService.GetPostFullInfoAsync(id);
+            var data = await _blogService.GetPostFullInfoAsync(id);
             return Json(data);
+        }
+
+        /// <summary>
+        /// 删除post
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("deletePost")]
+        public async Task Delete(int id)
+        { 
+           await _blogService.DeletePostAsync(id);
         }
     }
 }
