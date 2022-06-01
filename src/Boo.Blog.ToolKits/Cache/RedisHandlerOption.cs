@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Boo.Blog.ToolKits.Cache
+﻿namespace Boo.Blog.ToolKits.Cache
 {
     public enum RedisType
     { 
