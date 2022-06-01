@@ -4,5 +4,30 @@
         <name>Boo.Blog.Domain</name>
     </assembly>
     <members>
+        <member name="P:Boo.Blog.Domain.MultiTenant.Tenant.Id">
+            <summary>
+            商户id
+            </summary>
+        </member>
+        <member name="P:Boo.Blog.Domain.MultiTenant.Tenant.TenantCode">
+            <summary>
+            商户code
+            </summary>
+        </member>
+        <member name="P:Boo.Blog.Domain.MultiTenant.Tenant.TenantName">
+            <summary>
+            商户名称
+            </summary>
+        </member>
+        <member name="P:Boo.Blog.Domain.MultiTenant.Tenant.DatabaseServerId">
+            <summary>
+            数据库id
+            </summary>
+        </member>
+        <member name="P:Boo.Blog.Domain.MultiTenant.Tenant.IsDeleted">
+            <summary>
+            是否已删除
+            </summary>
+        </member>
     </members>
 </doc>

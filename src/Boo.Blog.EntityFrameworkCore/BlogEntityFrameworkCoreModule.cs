@@ -22,12 +22,8 @@ namespace Boo.Blog.EntityFrameworkCore
 
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            context.Services.AddAbpDbContext<BlogDbContext>(options =>
-            {
-                /* Remove "includeAllEntities: true" to create default repositories only for aggregate roots */
-                options.AddDefaultRepositories(includeAllEntities: true);
-            });
-
+            //注意，这里自定义的IDbContextProvider需要手动注入
+            context.Services.AddScoped<IDbContextProvider<BlogDbContext>, BlogDbContextProvider>();
             Configure<AbpDbContextOptions>(options =>
             {
                 switch (AppSettings.EnableDb)
@@ -39,9 +35,16 @@ namespace Boo.Blog.EntityFrameworkCore
                     case "MSSQL":
                         options.UseSqlServer();
                         break;
-
                 }
-                
+            });
+            context.Services.AddAbpDbContext<MultiTenantDbContext>(options =>
+            {
+                /* Remove "includeAllEntities: true" to create default repositories only for aggregate roots */
+                options.AddDefaultRepositories(includeAllEntities: true);
+            });
+            context.Services.AddAbpDbContext<BlogDbContext>(options =>
+            {
+                options.AddDefaultRepositories(includeAllEntities: true);
             });
         }
     }

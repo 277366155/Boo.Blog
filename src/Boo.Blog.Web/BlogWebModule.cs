@@ -1,9 +1,11 @@
 using System;
 using System.Linq;
+using Boo.Blog.Domain.MultiTenant;
 using Boo.Blog.EntityFrameworkCore;
 using Boo.Blog.Middleware;
 using Boo.Blog.MongoDB;
 using Boo.Blog.ToolKits.Configurations;
+using Boo.Blog.Middleware;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +18,8 @@ using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.ExceptionHandling;
 using Volo.Abp.Autofac;
 using Volo.Abp.Modularity;
+using Boo.Blog.Domain.MultiTenant.IRepositories;
+using Boo.Blog.EntityFrameworkCore.Repositories.MultiTenant;
 
 namespace Boo.Blog.Web
 {
@@ -25,7 +29,7 @@ namespace Boo.Blog.Web
         typeof(BlogHttpApiModule),
         //typeof(BlogSwaggerModule),        
         typeof(BlogEntityFrameworkCoreModule)
-        //typeof(BlogMongoDbModule)
+    //typeof(BlogMongoDbModule)
     )]
     public class BlogWebModule : AbpModule
     {
@@ -51,6 +55,12 @@ namespace Boo.Blog.Web
             context.Services.AddAuthorization();
             //注入IHttpClientFactory
             context.Services.AddHttpClient();
+            /*
+             * 注入一个tenant默认实例，用于在中间件中查询token信息，并绑定tenant基础信息。
+             * 进而在BlogDbContextProvider被框架调用执行时，获取到对应的BlogDbContext
+            **/
+            context.Services.AddScoped<ITenant, Tenant>();
+            context.Services.AddScoped<ITenantRepository, TenantRepository>();
             //context.Services.AddSingleton<ILogger>();
             //移除AbpExceptionFilter
             Configure<MvcOptions>(opt =>
@@ -74,6 +84,8 @@ namespace Boo.Blog.Web
 
             //app.UseMiddleware<GloableExceptionHandlerMiddleware>();
             app.UseMiddleware<SerilogHandlerMiddleware>();
+            //新增cookie验证，并可用于多租户DBContext的生成
+            app.AddIdentityHandler();
             //身份验证，必须放在UseRouting()与UseEndpoints()之间
             app.UseAuthentication();
             //认证授权

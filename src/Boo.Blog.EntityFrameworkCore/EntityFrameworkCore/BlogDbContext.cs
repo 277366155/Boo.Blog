@@ -7,7 +7,7 @@ using Volo.Abp.Identity;
 namespace Boo.Blog.EntityFrameworkCore
 {
     //[ReplaceDbContext(typeof(IIdentityDbContext))]
-    [ConnectionStringName("MySql")]
+    //[ConnectionStringName("MySql")]
     public class BlogDbContext : AbpDbContext<BlogDbContext>//,IIdentityDbContext        
     {
         /* Add DbSet properties for your Aggregate Roots / Entities here. */

@@ -10,8 +10,8 @@ using Volo.Abp.EntityFrameworkCore;
 namespace Boo.Blog.DbMigrator.Migrations
 {
     [DbContext(typeof(BlogMigrationsDbContext))]
-    [Migration("20210917081829_BlogMigrationDbContext")]
-    partial class BlogMigrationDbContext
+    [Migration("20220602093203_InitDB")]
+    partial class InitDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

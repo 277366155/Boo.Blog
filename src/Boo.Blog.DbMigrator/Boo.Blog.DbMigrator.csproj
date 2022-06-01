@@ -48,4 +48,8 @@
     <Compile Remove="DbMigratorHostedService.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

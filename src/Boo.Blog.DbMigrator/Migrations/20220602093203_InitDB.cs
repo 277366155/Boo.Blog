@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Boo.Blog.DbMigrator.Migrations
 {
-    public partial class BlogMigrationDbContext : Migration
+    public partial class InitDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

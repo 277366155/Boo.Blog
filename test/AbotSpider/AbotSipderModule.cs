@@ -4,6 +4,7 @@ using Boo.Blog.ToolKits.Cache;
 using Boo.Blog.ToolKits.Configurations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Collections.Generic;
 using Volo.Abp.Autofac;
 using Volo.Abp.Modularity;
 using Volo.Abp.MongoDB;
@@ -22,7 +23,7 @@ namespace AbotSpider
 
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            context.Services.AddCSRedisCore(AppSettings.Root.GetSection("Redis").Get<RedisHandlerOption>());
+            context.Services.AddCSRedisCore(AppSettings.Root.GetSection("Redis").Get<IEnumerable<RedisHandlerOption>>());
 
             context.Services.AddMongoDbContext<CrawlerMongoDbContext>(opt =>
             {

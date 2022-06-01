@@ -1,5 +1,9 @@
+using Boo.Blog.Blog;
+using Boo.Blog.Blog.DTO;
 using Boo.Blog.Consts;
+using Boo.Blog.Domain.MultiTenant;
 using Boo.Blog.HelloWorld;
+using Boo.Blog.Response;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -12,9 +16,11 @@ namespace Boo.Blog.HttpApi.Controllers
     public class HelloWorldController : ApiBaseController
     {
         readonly IHelloWorldService _helloWorldService;
-        public HelloWorldController(IHelloWorldService helloWorldService)
+        readonly IBlogService _blogService;
+        public HelloWorldController(IHelloWorldService helloWorldService, IBlogService blogService)
         {
             _helloWorldService = helloWorldService;
+            _blogService = blogService;
         }
 
         /// <summary>
@@ -33,10 +39,11 @@ namespace Boo.Blog.HttpApi.Controllers
         /// <param name="value"></param>
         /// <returns></returns>
         [HttpGet("cacheSet")]
-        public async Task<bool> CacheSet(string key, string value)
+        public async Task<ResponseDataResult<PostDto>> CacheSet(string key, string value)
         {
             await redisHandler.SetAsync(key, value,-1, ToolKits.Cache.RedisType.Common);
-            return true;
+            return await _blogService.CreateAsync(new Blog.DTO.PostDto { Author = key, Title = key, Html = value });
+
         }
     }
 }
