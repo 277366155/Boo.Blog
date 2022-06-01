@@ -33,9 +33,10 @@ namespace Boo.Blog.HttpApi.Controllers
         /// <param name="value"></param>
         /// <returns></returns>
         [HttpGet("cacheSet")]
-        public bool CacheSet(string key, string value)
+        public async Task<bool> CacheSet(string key, string value)
         {
-            return _helloWorldService.CacheTest(key, value);
+            await redisHandler.SetAsync(key, value,-1, ToolKits.Cache.RedisType.Common);
+            return true;
         }
     }
 }

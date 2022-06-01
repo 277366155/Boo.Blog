@@ -1,5 +1,8 @@
 ﻿using Boo.Blog.Application;
+using Boo.Blog.ToolKits.Cache;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Collections.Generic;
 using Volo.Abp.Application.Services;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Identity;
@@ -21,6 +24,8 @@ namespace Boo.Blog
                 opt.AddMaps<BlogApplicationModule>(validate: true);
                 opt.AddProfile<BlogAutoMapperProfile>(validate: true);
             });
+            var configuration = context.Services.GetConfiguration();
+            context.Services.AddCSRedisCore(configuration.GetSection("Redis").Get<IEnumerable<RedisHandlerOption>>());
             //context.Services.AddSingleton(typeof(ApplicationInterceptor));
             context.Services.OnRegistred(register =>
             {
