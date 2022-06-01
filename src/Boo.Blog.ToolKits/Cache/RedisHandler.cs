@@ -28,7 +28,7 @@ namespace Boo.Blog.ToolKits.Cache
             }
         }
 
-        private static CSRedisClient InitRedisClient(RedisHandlerOption option)
+        private CSRedisClient InitRedisClient(RedisHandlerOption option)
         {
             CSRedisClient client = null;
             if (option.Single)
