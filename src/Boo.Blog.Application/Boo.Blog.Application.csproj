@@ -20,9 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Boo.Blog.Application.Caching\Boo.Blog.Application.Caching.csproj" />
-    <ProjectReference Include="..\Boo.Blog.EntityFrameworkCore\Boo.Blog.EntityFrameworkCore.csproj" />
-    <ProjectReference Include="..\Boo.Blog.MongoDB\Boo.Blog.MongoDB.csproj" />
+    <ProjectReference Include="..\Boo.Blog.Application.Contracts\Boo.Blog.Application.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,7 +3,7 @@ using Volo.Abp.Modularity;
 using Volo.Abp.MongoDB;
 using Volo.Abp.Uow;
 
-namespace Boo.Blog.MongoDb
+namespace Boo.Blog.MongoDB
 {
     [DependsOn(typeof(BlogDomainModule),
         typeof(AbpMongoDbModule))]

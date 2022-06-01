@@ -10,8 +10,7 @@ namespace Boo.Blog
     [DependsOn(
         typeof(AbpAutoMapperModule),
         typeof(AbpIdentityApplicationModule),
-        typeof(BlogDomainModule),
-        typeof(BlogApplicationCachingModule)
+        typeof(BlogDomainModule)
         )]
     public class BlogApplicationModule : AbpModule
     {

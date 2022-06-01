@@ -1,5 +1,5 @@
 ﻿using AbotSpider.Crawlers;
-using Boo.Blog.MongoDb;
+using Boo.Blog.MongoDB;
 using Boo.Blog.ToolKits.Cache;
 using Boo.Blog.ToolKits.Configurations;
 using Microsoft.Extensions.Configuration;

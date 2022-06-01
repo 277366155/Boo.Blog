@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using Boo.Blog.EntityFrameworkCore;
 using Boo.Blog.Middleware;
-using Boo.Blog.MongoDb;
+using Boo.Blog.MongoDB;
 using Boo.Blog.ToolKits.Configurations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -23,10 +23,9 @@ namespace Boo.Blog.Web
         typeof(AbpAspNetCoreMvcModule),
         typeof(AbpAutofacModule),
         typeof(BlogHttpApiModule),
-        //typeof(BlogSwaggerModule),
-        
-        typeof(BlogEntityFrameworkCoreModule),
-        typeof(BlogMongoDbModule)
+        //typeof(BlogSwaggerModule),        
+        typeof(BlogEntityFrameworkCoreModule)
+        //typeof(BlogMongoDbModule)
     )]
     public class BlogWebModule : AbpModule
     {

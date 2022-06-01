@@ -1,7 +1,7 @@
 ﻿using Volo.Abp.Data;
 using Volo.Abp.MongoDB;
 
-namespace Boo.Blog.MongoDB.MongoDb
+namespace Boo.Blog.MongoDB
 {
     [ConnectionStringName("MongoDb")]
     public class BaseMongoDbContext : AbpMongoDbContext

@@ -26,7 +26,7 @@
         </member>
         <member name="M:Boo.Blog.Controllers.BlogController.GetBlogCount">
              <summary>
-            根据id获取博文
+            获取博文总数量
              </summary>
              <returns></returns>
         </member>
@@ -56,6 +56,12 @@
             删除post
             </summary>
             <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boo.Blog.Controllers.BlogController.TestUow">
+            <summary>
+            uow测试
+            </summary>
             <returns></returns>
         </member>
         <member name="T:Boo.Blog.HttpApi.Controllers.HelloWorldController">

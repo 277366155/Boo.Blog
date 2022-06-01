@@ -2,7 +2,7 @@
 
 namespace Boo.Blog.Domain.Blog.IRepositories
 {
-    public  interface IFriendLinkRepository:IRepository<FriendLink,long>
+    public  interface IFriendLinkRepository: IRepositoryBase<FriendLink>
     {
     }
 }

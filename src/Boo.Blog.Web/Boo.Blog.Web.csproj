@@ -11,8 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Boo.Blog.EntityFrameworkCore\Boo.Blog.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\Boo.Blog.HttpApi\Boo.Blog.HttpApi.csproj" />
     <ProjectReference Include="..\Boo.Blog.Middleware\Boo.Blog.Middleware.csproj" />
+    <ProjectReference Include="..\Boo.Blog.MongoDB\Boo.Blog.MongoDB.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,10 +22,6 @@
     <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="7.0.2" />
     <PackageReference Include="Volo.Abp.AspNetCore" Version="4.4.2" />
     <PackageReference Include="Volo.Abp.Autofac" Version="4.4.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="logs\" />
   </ItemGroup>
 
   <ItemGroup>
