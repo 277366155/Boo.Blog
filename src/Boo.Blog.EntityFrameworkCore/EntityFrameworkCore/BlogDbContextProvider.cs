@@ -20,7 +20,7 @@ using Volo.Abp.DependencyInjection;
 namespace Boo.Blog.EntityFrameworkCore
 {
 
-    public class BlogDbContextProvider : IDbContextProvider<BlogDbContext>//, IScopedDependency
+    public class BlogDbContextProvider : IDbContextProvider<BlogDbContext>, IScopedDependency
     {
         public ILogger<BlogDbContextProvider> Logger { get; set; }
         public IAbpLazyServiceProvider LazyServiceProvider { get; set; }
@@ -44,6 +44,7 @@ namespace Boo.Blog.EntityFrameworkCore
             _dbConnFactory = dbConnFactory;
 
             Logger = NullLogger<BlogDbContextProvider>.Instance;
+            Logger.LogWarning("!!!!!!!BlogDbContextProvider!!!!!!!");
         }
 
         public async Task<BlogDbContext> GetDbContextAsync()

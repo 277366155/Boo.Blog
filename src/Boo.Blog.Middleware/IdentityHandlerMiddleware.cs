@@ -1,7 +1,9 @@
 ﻿using Boo.Blog.Domain.MultiTenant;
+using Boo.Blog.Middleware.Attributes;
 using Boo.Blog.ToolKits.Cache;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
 using System;
 using System.Threading.Tasks;
 
@@ -15,7 +17,6 @@ namespace Boo.Blog.Middleware
             return applicationBuilder;
         }
     }
-
     public class IdentityHandlerMiddleware
     {
         readonly RequestDelegate _next;
@@ -37,23 +38,30 @@ namespace Boo.Blog.Middleware
 
         public async Task InvokeAsync(HttpContext context, ITenant tenant)
         {
-            var cookies = context.Request.Cookies;
-            var token = string.Empty;
-            if (cookies == null || !cookies.TryGetValue(tokenKey, out token))
+            var endPoint = context.Features.Get<IEndpointFeature>()?.Endpoint;
+            var attr = endPoint.Metadata.GetMetadata<IgnoreAuthenticationAttribute>();
+            if (attr == null)
             {
-                context.Response.StatusCode = StatusCodes.Status403Forbidden;
-                return;
+                var cookies = context.Request.Cookies;
+                var token = string.Empty;
+
+                //鉴权的逻辑不能写在这里，会对所有接口都进行身份验证，不合理。
+                if (cookies == null || !cookies.TryGetValue(tokenKey, out token))
+                {
+                    context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                    return;
+                }
+                var tenantInfo = await _redisHandler.GetAsync<Tenant>(token);
+                if (tenantInfo == null || tenantInfo.IsDeleted)
+                {
+                    context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                    return;
+                }
+                tenant.Id = tenantInfo.Id;
+                tenant.TenantName = tenantInfo.TenantName;
+                tenant.DatabaseServerId = tenantInfo.DatabaseServerId;             
             }
-            var tenantInfo = await _redisHandler.GetAsync<Tenant>(token);
-            if (tenantInfo == null || tenantInfo.IsDeleted)
-            {
-                context.Response.StatusCode = StatusCodes.Status403Forbidden;
-                return;
-            }
-            tenant.Id = tenantInfo.Id;
-            tenant.TenantName = tenantInfo.TenantName;
-            tenant.DatabaseServerId = tenantInfo.DatabaseServerId;
-            //先验证身份，再执行action
+
             await _next.Invoke(context);
         }
     }

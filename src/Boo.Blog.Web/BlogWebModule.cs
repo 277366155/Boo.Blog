@@ -3,16 +3,13 @@ using System.Linq;
 using Boo.Blog.Domain.MultiTenant;
 using Boo.Blog.EntityFrameworkCore;
 using Boo.Blog.Middleware;
-using Boo.Blog.MongoDB;
 using Boo.Blog.ToolKits.Configurations;
-using Boo.Blog.Middleware;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using Serilog;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.ExceptionHandling;
@@ -25,6 +22,7 @@ namespace Boo.Blog.Web
 {
     [DependsOn(
         typeof(AbpAspNetCoreMvcModule),
+        typeof(MiddlewareModule),
         typeof(AbpAutofacModule),
         typeof(BlogHttpApiModule),
         //typeof(BlogSwaggerModule),        

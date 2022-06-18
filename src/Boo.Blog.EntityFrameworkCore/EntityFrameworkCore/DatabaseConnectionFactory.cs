@@ -16,10 +16,9 @@ namespace Boo.Blog.EntityFrameworkCore
         static int minPoolSize = 10;
         static int connectTimeout = 600;
         static string applicationName = "blog";
-        public DatabaseConnectionFactory(ITenantRepository tenantRepository, IDatabaseServerRepository databaseServers)
+        public DatabaseConnectionFactory(ITenantRepository tenantRepository)
         {
             _tenantRepository = tenantRepository;
-            _databaseServers = databaseServers;
         }
         public string GetConnectionString(long tenantId)
         {

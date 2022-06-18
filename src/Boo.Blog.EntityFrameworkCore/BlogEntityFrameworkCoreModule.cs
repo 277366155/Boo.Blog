@@ -22,7 +22,7 @@ namespace Boo.Blog.EntityFrameworkCore
 
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            //注意，这里自定义的IDbContextProvider需要手动注入
+            ////注意：因为BlogDbContextProvider与接口名称字符串结尾不相同，这里自定义的IDbContextProvider需要手动注入。
             context.Services.AddScoped<IDbContextProvider<BlogDbContext>, BlogDbContextProvider>();
             Configure<AbpDbContextOptions>(options =>
             {

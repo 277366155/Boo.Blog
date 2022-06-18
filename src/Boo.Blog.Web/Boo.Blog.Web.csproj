@@ -7,13 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Interceptors\**" />
+    <Content Remove="Interceptors\**" />
+    <EmbeddedResource Remove="Interceptors\**" />
+    <None Remove="Interceptors\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="BlogSwaggerModule.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Boo.Blog.EntityFrameworkCore\Boo.Blog.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\Boo.Blog.HttpApi\Boo.Blog.HttpApi.csproj" />
-    <ProjectReference Include="..\Boo.Blog.Middleware\Boo.Blog.Middleware.csproj" />
     <ProjectReference Include="..\Boo.Blog.MongoDB\Boo.Blog.MongoDB.csproj" />
   </ItemGroup>
 
@@ -35,6 +41,10 @@
     <None Update="Boo.Blog.HttpApi.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="logs\" />
   </ItemGroup>
 
 </Project>
