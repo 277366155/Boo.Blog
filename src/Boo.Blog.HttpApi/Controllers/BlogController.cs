@@ -16,11 +16,11 @@ namespace Boo.Blog.Controllers
         readonly IBlogService _blogService;
         public BlogController(IBlogService blogService)
         {
-            _blogService = blogService;
+            _blogService = blogService; //LazyServiceProvider.LazyGetRequiredService<IBlogService>();
         }
-
+      
         /// <summary>
-        ///根据id获取博文
+        ///获取博文总数量
         /// </summary>
         /// <returns></returns>
         [HttpGet("GetBlogCount")]
@@ -38,7 +38,7 @@ namespace Boo.Blog.Controllers
         [HttpPost("add")]
         public async Task<IActionResult> InsertBlogAsync(PostDto input)
         {
-           var data = await _blogService.CreateAsync(input);
+            var data = await _blogService.CreateAsync(input);
             return Json(data);
         }
 
@@ -62,8 +62,29 @@ namespace Boo.Blog.Controllers
         [HttpGet("GetBlogInfo/{id}")]
         public async Task<IActionResult> Test(long id)
         {
-            var data =await _blogService.GetPostFullInfoAsync(id);
+            var data = await _blogService.GetPostFullInfoAsync(id);
             return Json(data);
+        }
+
+        /// <summary>
+        /// 删除post
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("deletePost")]
+        public async Task Delete(int id)
+        { 
+           await _blogService.DeletePostAsync(id);
+        }
+
+        /// <summary>
+        /// uow测试
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("testuow")]
+        public async Task TestUow()
+        {
+            await _blogService.TestUowAsync();
         }
     }
 }

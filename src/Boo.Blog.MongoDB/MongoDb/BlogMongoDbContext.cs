@@ -1,17 +1,11 @@
 ﻿using Boo.Blog.Domain.Blog;
 using MongoDB.Driver;
-using Volo.Abp.Data;
-using Volo.Abp.MongoDB;
 
-namespace Boo.Blog.MongoDb
+namespace Boo.Blog.MongoDB
 {
-    [ConnectionStringName("MongoDb")]
-    public class BlogMongoDbContext:AbpMongoDbContext
+    public class BlogMongoDbContext: BaseMongoDbContext
     {
         public IMongoCollection<Post> Posts => Collection<Post>();
-        protected override void CreateModel(IMongoModelBuilder modelBuilder)
-        {
-            base.CreateModel(modelBuilder);
-        }
+
     }
 }

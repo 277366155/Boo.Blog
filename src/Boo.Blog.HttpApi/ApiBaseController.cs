@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Boo.Blog.ToolKits.Cache;
+using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc;
 
 namespace Boo.Blog
@@ -7,6 +8,7 @@ namespace Boo.Blog
     [Route("[controller]")]
     public class ApiBaseController : AbpController
     {
+        public IRedisHandler redisHandler => LazyServiceProvider.LazyGetRequiredService<IRedisHandler>();
       
     }
 }

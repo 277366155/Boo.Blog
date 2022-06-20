@@ -2,7 +2,7 @@
 
 namespace Boo.Blog.Domain.Blog.IRepositories
 {
-    public interface IPostTagRepository:IRepository<PostTag,long>
+    public interface IPostTagRepository: IRepositoryBase<PostTag>
     {
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Boo.Blog.Domain.Blog;
 using Boo.Blog.Domain.Blog.IRepositories;
-using Boo.Blog.MongoDb;
 using Volo.Abp.Domain.Repositories.MongoDB;
 using Volo.Abp.MongoDB;
 

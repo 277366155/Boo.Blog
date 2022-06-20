@@ -10,5 +10,7 @@ namespace Boo.Blog.Blog
     {
         Task<ResponseDataResult<long>> GetPostsCountAsync();// (IEnumerable<PostDto> postDto);
         Task<ResponseDataResult<PostFullInfoDto>> GetPostFullInfoAsync(long id);
+        Task DeletePostAsync(int id);
+        Task TestUowAsync();
     }
 }

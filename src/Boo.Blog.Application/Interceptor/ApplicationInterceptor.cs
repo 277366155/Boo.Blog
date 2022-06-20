@@ -1,6 +1,8 @@
-﻿using Serilog;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Serilog;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Volo.Abp.DependencyInjection;
 using Volo.Abp.DynamicProxy;
 
 namespace Boo.Blog.Application
@@ -8,7 +10,7 @@ namespace Boo.Blog.Application
     /// <summary>
     /// application层的拦截器
     /// </summary>
-    public  class ApplicationInterceptor:AbpInterceptor
+    public  class ApplicationInterceptor:AbpInterceptor,ISingletonDependency
     {
         readonly Stopwatch sw = new Stopwatch();
         public override async Task InterceptAsync(IAbpMethodInvocation invocation)

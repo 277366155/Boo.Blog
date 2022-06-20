@@ -95,7 +95,7 @@ namespace Boo.Blog.Web
                 config.RoutePrefix = string.Empty;
 
                 // API页面Title
-                config.DocumentTitle = "😍接口文档";
+                config.DocumentTitle = "接口文档";
             });
 
         }
