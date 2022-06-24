@@ -17,7 +17,7 @@ namespace Boo.Blog.DbMigrator.Migrations
             modelBuilder
                 .HasAnnotation("_Abp_DatabaseProvider", EfCoreDatabaseProvider.MySql)
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
-                .HasAnnotation("ProductVersion", "5.0.10");
+                .HasAnnotation("ProductVersion", "5.0.9");
 
             modelBuilder.Entity("Boo.Blog.Domain.Blog.Category", b =>
                 {

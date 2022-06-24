@@ -2,15 +2,17 @@
 using Boo.Blog.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
 namespace Boo.Blog.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(MultiTenantDbContext))]
-    partial class MultiTenantDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220623022214_addDBDefaultField")]
+    partial class addDBDefaultField
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

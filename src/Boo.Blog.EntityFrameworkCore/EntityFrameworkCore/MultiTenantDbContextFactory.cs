@@ -23,10 +23,10 @@ namespace Boo.Blog.EntityFrameworkCore
             switch (AppSettings.EnableDb)
             {
                 default:
-                case "MYSQL":
+                case  DatabaseType.MYSQL:
                     builder.UseMySql(AppSettings.Root.GetConnectionString("MySql"), MySqlServerVersion.LatestSupportedServerVersion);
                     break;
-                case "MSSQL":
+                case DatabaseType.MSSQL:
                     builder.UseSqlServer(AppSettings.Root.GetConnectionString("MSSql"));
                     break;
             }

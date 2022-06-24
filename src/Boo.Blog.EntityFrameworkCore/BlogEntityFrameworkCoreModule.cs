@@ -1,5 +1,9 @@
 ﻿using Boo.Blog.ToolKits.Configurations;
 using Microsoft.Extensions.DependencyInjection;
+using System.Collections.Generic;
+using System.Reflection;
+using Volo.Abp;
+using Volo.Abp.Dapper;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.MySQL;
 using Volo.Abp.EntityFrameworkCore.SqlServer;
@@ -11,7 +15,8 @@ namespace Boo.Blog.EntityFrameworkCore
         typeof(BlogDomainModule),
         typeof(AbpEntityFrameworkCoreModule),
         typeof(AbpEntityFrameworkCoreSqlServerModule),
-        typeof(AbpEntityFrameworkCoreMySQLModule)
+        typeof(AbpEntityFrameworkCoreMySQLModule),
+        typeof(AbpDapperModule)
         )]
     public class BlogEntityFrameworkCoreModule : AbpModule
     {
@@ -29,10 +34,10 @@ namespace Boo.Blog.EntityFrameworkCore
                 switch (AppSettings.EnableDb)
                 {
                     default:
-                    case "MYSQL":
+                    case  DatabaseType.MYSQL:
                         options.UseMySQL();
                         break;
-                    case "MSSQL":
+                    case DatabaseType.MSSQL:
                         options.UseSqlServer();
                         break;
                 }
@@ -47,5 +52,6 @@ namespace Boo.Blog.EntityFrameworkCore
                 options.AddDefaultRepositories(includeAllEntities: true);
             });
         }
+
     }
 }

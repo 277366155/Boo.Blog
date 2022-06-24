@@ -80,7 +80,7 @@ namespace Boo.Blog.Web
             }
             app.UseRouting();
 
-            //app.UseMiddleware<GloableExceptionHandlerMiddleware>();
+            app.UseMiddleware<GloableExceptionHandlerMiddleware>();
             app.UseMiddleware<SerilogHandlerMiddleware>();
             //新增cookie验证，并可用于多租户DBContext的生成
             app.AddIdentityHandler();

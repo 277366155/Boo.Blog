@@ -2,10 +2,10 @@
 using Boo.Blog.Blog.DTO;
 using Boo.Blog.Domain.Blog;
 using System.Threading.Tasks;
-using Boo.Blog.Response;
 using Boo.Blog.Domain.Blog.IRepositories;
 using System.Linq;
 using Volo.Abp.Uow;
+using System;
 
 namespace Boo.Blog.Application.Blog
 {
@@ -39,13 +39,13 @@ namespace Boo.Blog.Application.Blog
         /// </summary>
         /// <param name="id">博客id</param>
         /// <returns></returns>
-        public async Task<ResponseDataResult<PostFullInfoDto>> GetPostFullInfoAsync(long id)
+        public async Task<PostFullInfoDto> GetPostFullInfoAsync(long id)
         {
 
             var post = await _postRepository.GetAsync(id);
             if (post == null)
             {
-                return ResponseResult.IsFail<PostFullInfoDto>("数据不存在");
+                 throw new Exception("数据不存在");
             }
             var postFullInfo = ObjectMapper.Map<Post, PostFullInfoDto>(post);
             if (post.CategoryId != 0)
@@ -55,13 +55,13 @@ namespace Boo.Blog.Application.Blog
             var tagList = await _postTagRepository.GetListAsync(a => a.PostId == post.Id);
             postFullInfo.Tags = await _tagRepository.GetListAsync(a => tagList.Select(t => t.Id).Contains(a.Id));
             postFullInfo.FriendLinks = await _friendLinkRepository.GetListAsync();
-            return ResponseResult.IsSuccess(postFullInfo);
+            return postFullInfo;
         }
 
-        public async Task<ResponseDataResult<long>> GetPostsCountAsync()
+        public async Task<long> GetPostsCountAsync()
         {
             var data = await _postRepository.GetCountAsync();
-            return ResponseResult.IsSuccess(data, "ok");
+            return data;
         }
 
         public async Task DeletePostAsync(int id)
@@ -72,9 +72,9 @@ namespace Boo.Blog.Application.Blog
         public async Task TestUowAsync()
         {
             var uow = _unitOfWork.Begin(new AbpUnitOfWorkOptions());
-            await _postRepository.InsertAsync(new Post { Title="test uow" });
+            await _postRepository.InsertAsync(new Post { Title="test uow", Author="test author", Url="baidu.com",CategoryId=1, CreationTime= DateTime.Now});
             await _postTagRepository.DeleteAsync(a=>a.Id==2);
-            throw new System.Exception("test uow error");
+            //throw new System.Exception("test uow error");
            await uow.CompleteAsync();
         }
     }

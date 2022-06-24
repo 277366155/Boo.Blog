@@ -14,5 +14,7 @@ namespace Boo.Blog.Domain.MultiTenant
         [StringLength(128)]
         public string DbPassword { get; set;}
 
+        public bool IsDefault { get; set; }
+
     }
 }

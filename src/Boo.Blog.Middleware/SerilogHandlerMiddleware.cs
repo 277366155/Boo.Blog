@@ -26,7 +26,6 @@ namespace Boo.Blog.Middleware
             var start = Stopwatch.GetTimestamp();
             try
             {
-                Console.WriteLine(context.Request.Path);
                 //先执行后续相关操作，后统计执行时长
                 await _next.Invoke(context);                
                 var statusCode = context.Response?.StatusCode;

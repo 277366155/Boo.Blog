@@ -3,20 +3,21 @@ using Boo.Blog.Blog.DTO;
 using Boo.Blog.Consts;
 using Boo.Blog.Domain.Blog;
 using Boo.Blog.Paged;
+using Boo.Blog.Response;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace Boo.Blog.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [ApiExplorerSettings(GroupName = SwaggerGrouping.GroupNameV2)]
     public class BlogController : ApiBaseController
     {
         readonly IBlogService _blogService;
         public BlogController(IBlogService blogService)
         {
-            _blogService = blogService; //LazyServiceProvider.LazyGetRequiredService<IBlogService>();
+            _blogService = blogService; 
         }
       
         /// <summary>
@@ -24,10 +25,10 @@ namespace Boo.Blog.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("GetBlogCount")]
-        public async Task<IActionResult> GetBlogCount()
+        public async Task<ResponseResult> GetBlogCount()
         {
             var data = await _blogService.GetPostsCountAsync();
-            return Json(data);
+            return ResponseResult.IsSuccess(data);
         }
 
         /// <summary>
@@ -36,10 +37,10 @@ namespace Boo.Blog.Controllers
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost("add")]
-        public async Task<IActionResult> InsertBlogAsync(PostDto input)
+        public async Task<ResponseResult> InsertBlogAsync(PostDto input)
         {
             var data = await _blogService.CreateAsync(input);
-            return Json(data);
+            return ResponseResult.IsSuccess(data);
         }
 
         /// <summary>
@@ -48,10 +49,10 @@ namespace Boo.Blog.Controllers
         /// <param name="page"></param>
         /// <returns></returns>
         [HttpPost("getList")]
-        public async Task<IActionResult> GetListAsync(PageParam<Post> page)
+        public async Task<ResponseResult> GetListAsync(PageParam<Post> page)
         {
             var data = await _blogService.GetListAsync(page);
-            return Json(data);
+            return ResponseResult.IsSuccess(data);
         }
 
         /// <summary>
@@ -60,10 +61,10 @@ namespace Boo.Blog.Controllers
         /// <param name="id">博客id</param>
         /// <returns></returns>
         [HttpGet("GetBlogInfo/{id}")]
-        public async Task<IActionResult> Test(long id)
+        public async Task<ResponseResult> Test(long id)
         {
             var data = await _blogService.GetPostFullInfoAsync(id);
-            return Json(data);
+            return ResponseResult.IsSuccess(data);
         }
 
         /// <summary>
@@ -72,9 +73,10 @@ namespace Boo.Blog.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete("deletePost")]
-        public async Task Delete(int id)
+        public async Task<ResponseResult> Delete(int id)
         { 
            await _blogService.DeletePostAsync(id);
+            return ResponseResult.IsSuccess();
         }
 
         /// <summary>
@@ -82,9 +84,10 @@ namespace Boo.Blog.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost("testuow")]
-        public async Task TestUow()
+        public async Task<ResponseResult> TestUow()
         {
             await _blogService.TestUowAsync();
+            return ResponseResult.IsSuccess();
         }
     }
 }

@@ -8,10 +8,10 @@ namespace Boo.Blog.Authorize
 {
     public interface IAuthorizeService//:IServiceBase<>
     {
-        Task<ResponseDataResult<string>> GetLoginAddressAsync();
+        Task<string> GetLoginAddressAsync();
 
-        Task<ResponseDataResult<string>> GetAccessTokenAsync(string code);
+        Task<string> GetAccessTokenAsync(string code);
 
-        Task<ResponseDataResult<string>> GenerateTokenAsync(string accessToken);
+        Task<string> GenerateTokenAsync(string accessToken);
     }
 }

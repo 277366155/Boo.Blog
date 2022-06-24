@@ -77,7 +77,7 @@ namespace Boo.Blog.ToolKits.Configurations
             }
         }
 
-        public static string EnableDb => Root["ConnectionStrings:EnableDb"];
+        public static DatabaseType EnableDb => Root.GetValue<DatabaseType>("ConnectionStrings:EnableDb");
         /// <summary>
         /// 读取根节点下的appsetting节点
         /// </summary>

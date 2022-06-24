@@ -30,9 +30,9 @@ namespace Boo.Blog.HttpApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<string> HelloWorld()
+        public async Task<ResponseResult> HelloWorld()
         {
-            return await _helloWorldService.HelloWorld(); 
+            return ResponseResult.IsSuccess(await _helloWorldService.HelloWorld());
         }
         /// <summary>
         /// ª∫¥Ê≤‚ ‘
@@ -41,11 +41,17 @@ namespace Boo.Blog.HttpApi.Controllers
         /// <param name="value"></param>
         /// <returns></returns>
         [HttpGet("cacheSet")]
-        public async Task<ResponseDataResult<PostDto>> CacheSet(string key, string value)
+        public async Task<ResponseResult> CacheSet(string key, string value)
         {
             var rd = new Random();
             await redisHandler.SetAsync(key, value,-1, ToolKits.Cache.RedisType.Common);
-            return await _blogService.CreateAsync(new Blog.DTO.PostDto { Author = key+rd.Next(), Title = key+rd.Next(), Html = value+rd.Next() });
+            return ResponseResult.IsSuccess(await _blogService.CreateAsync(new PostDto { Author = key+rd.Next(), Title = key+rd.Next(), Html = value+rd.Next() }));
+        }
+
+        [HttpPost("setsession")]
+        public async Task<IActionResult> SetSession(long tenantId)
+        {
+            return null;
         }
     }
 }

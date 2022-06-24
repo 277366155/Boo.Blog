@@ -99,10 +99,10 @@ namespace Boo.Blog.EntityFrameworkCore
         {
             return unitOfWork.Options.IsTransactional
                 ? await CreateDbContextWithTransactionAsync(unitOfWork)
-                : await CreateDbContextAsync();
+                : CreateDbContext();
         }
 
-        private async Task<BlogDbContext> CreateDbContextAsync()
+        private BlogDbContext CreateDbContext()
         {
             if (_currentBlogDbContext != null)
                 return _currentBlogDbContext;
@@ -133,7 +133,7 @@ namespace Boo.Blog.EntityFrameworkCore
 
             if (activeTransaction == null)
             {
-                var dbContext = unitOfWork.ServiceProvider.GetRequiredService<BlogDbContext>();
+                var dbContext = CreateDbContext();//unitOfWork.ServiceProvider.GetRequiredService<BlogDbContext>();
 
                 var dbTransaction = unitOfWork.Options.IsolationLevel.HasValue
                     ? await dbContext.Database.BeginTransactionAsync(unitOfWork.Options.IsolationLevel.Value, GetCancellationToken())

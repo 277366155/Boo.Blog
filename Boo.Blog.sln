@@ -53,7 +53,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbotSpider", "test\AbotSpid
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.ConsoleApp", "test\EventBus.Console\EventBus.ConsoleApp.csproj", "{189583CE-1522-40B5-85B7-645AE3435C28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp", "WebApp\WebApp.csproj", "{8FABA743-AE8D-43C0-890D-C51FA8C608D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp", "WebApp\WebApp.csproj", "{8FABA743-AE8D-43C0-890D-C51FA8C608D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTest", "test\ConsoleTest\ConsoleTest.csproj", "{A88379C2-BAB5-4D22-BFE4-8CE6EBDDBEAD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -153,6 +155,10 @@ Global
 		{8FABA743-AE8D-43C0-890D-C51FA8C608D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FABA743-AE8D-43C0-890D-C51FA8C608D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FABA743-AE8D-43C0-890D-C51FA8C608D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A88379C2-BAB5-4D22-BFE4-8CE6EBDDBEAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A88379C2-BAB5-4D22-BFE4-8CE6EBDDBEAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A88379C2-BAB5-4D22-BFE4-8CE6EBDDBEAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A88379C2-BAB5-4D22-BFE4-8CE6EBDDBEAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -181,6 +187,7 @@ Global
 		{1F3FDE8C-CAC9-43B7-A3E2-CCD585E7E60A} = {04DBDB01-70F4-4E06-B468-8F87850B22BE}
 		{189583CE-1522-40B5-85B7-645AE3435C28} = {04DBDB01-70F4-4E06-B468-8F87850B22BE}
 		{8FABA743-AE8D-43C0-890D-C51FA8C608D5} = {04DBDB01-70F4-4E06-B468-8F87850B22BE}
+		{A88379C2-BAB5-4D22-BFE4-8CE6EBDDBEAD} = {04DBDB01-70F4-4E06-B468-8F87850B22BE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {28315BFD-90E7-4E14-A2EA-F3D23AF4126F}

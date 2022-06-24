@@ -24,7 +24,7 @@ namespace Boo.Blog.Controllers
         [HttpGet("GetUrl")]
         public async Task<ResponseDataResult<string>> GetLoginAddressAsync()
         {
-            return await _authorizeService.GetLoginAddressAsync();
+            return ResponseResult.IsSuccess<string>(await _authorizeService.GetLoginAddressAsync());
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Boo.Blog.Controllers
         [HttpGet("GetAccessToken")]
         public async Task<ResponseDataResult<string>> GetAccessTokenAsync(string code)
         {
-            return await _authorizeService.GetAccessTokenAsync(code);
+            return ResponseResult.IsSuccess<string>(await _authorizeService.GetAccessTokenAsync(code));
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Boo.Blog.Controllers
         [HttpGet("GenerateToken")]
         public async Task<ResponseDataResult<string>> GenerateTokenAsync(string accessToken)
         {
-            return await _authorizeService.GenerateTokenAsync(accessToken);
+            return ResponseResult.IsSuccess<string>(await _authorizeService.GenerateTokenAsync(accessToken));
         }
     }
 }

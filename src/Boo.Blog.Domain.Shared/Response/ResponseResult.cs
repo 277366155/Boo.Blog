@@ -11,7 +11,7 @@ namespace Boo.Blog.Response
         public long TimeStamp => DateTime.Now.ToTicks();
 
         #region 返回类型为ResponseResult
-        public static ResponseResult IsSucess(string msg = "Succeed")
+        public static ResponseResult IsSuccess(string msg = "Succeed")
         {
             return new ResponseResult()
             {

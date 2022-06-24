@@ -28,11 +28,18 @@ namespace Boo.Blog.Middleware
                 await ExceptionHandlerAsync(context,ex.Message);
             }
 
-            if (context.Response.StatusCode != StatusCodes.Status200OK)
+            switch (context.Response.StatusCode)
             {
-                object message = "";
-                Enum.TryParse(typeof(HttpStatusCode),context.Response.StatusCode.ToString(),out message);
-                await ExceptionHandlerAsync(context, message.ToString());
+                case StatusCodes.Status200OK:
+                case StatusCodes.Status401Unauthorized:
+                    break;
+                case StatusCodes.Status404NotFound:
+                   await context.Response.WriteAsync("滴滴，404");
+                    break;
+                default:
+                    Enum.TryParse(typeof(HttpStatusCode), context.Response.StatusCode.ToString(), out var message);
+                    await ExceptionHandlerAsync(context, message.ToString());
+                    break;
             }
         }
 

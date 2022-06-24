@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Repositories\Blog\RepositoryBase.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Volo.Abp.MongoDB" Version="4.4.2" />
   </ItemGroup>
 

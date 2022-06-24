@@ -10,8 +10,8 @@ using Volo.Abp.EntityFrameworkCore;
 namespace Boo.Blog.DbMigrator.Migrations
 {
     [DbContext(typeof(BlogMigrationsDbContext))]
-    [Migration("20220602093203_InitDB")]
-    partial class InitDB
+    [Migration("20220621075225_initdb")]
+    partial class initdb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,7 +19,7 @@ namespace Boo.Blog.DbMigrator.Migrations
             modelBuilder
                 .HasAnnotation("_Abp_DatabaseProvider", EfCoreDatabaseProvider.MySql)
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
-                .HasAnnotation("ProductVersion", "5.0.10");
+                .HasAnnotation("ProductVersion", "5.0.9");
 
             modelBuilder.Entity("Boo.Blog.Domain.Blog.Category", b =>
                 {

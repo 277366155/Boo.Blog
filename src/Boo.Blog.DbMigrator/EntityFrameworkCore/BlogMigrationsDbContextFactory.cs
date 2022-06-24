@@ -13,16 +13,16 @@ namespace Boo.Blog.DbMigrator.EntityFrameworkCore
             switch (AppSettings.EnableDb)
             {
                 default:
-                case "MYSQL":
-                    builder.UseMySql(AppSettings.Root.GetConnectionString("MySql"), MySqlServerVersion.LatestSupportedServerVersion);
+                case DatabaseType.MYSQL:
+                    builder.UseMySql(AppSettings.Root.GetConnectionString("MySql2"), MySqlServerVersion.LatestSupportedServerVersion);
                     break;
-                case "MSSQL":
-                    builder.UseSqlServer(AppSettings.Root.GetConnectionString("MSSql"));
+                case DatabaseType.MSSQL:
+                    builder.UseSqlServer(AppSettings.Root.GetConnectionString("MSSql2"));
                     break;
             }
-                
+
             return new BlogMigrationsDbContext(builder.Options);
         }
-        
+
     }
 }
