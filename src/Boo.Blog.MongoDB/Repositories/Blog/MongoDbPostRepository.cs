@@ -18,7 +18,7 @@ namespace Boo.Blog.MongoDB.Repositories.Blog
 
         }
 
-        public async Task<Tuple<IEnumerable<Post>, int>> GetPageListAsync(Expression<Func<Post, bool>> filter, Dictionary<Expression<Func<Post, object>>, bool> sort, int pageIndex, int pageSize, IUnitOfWork uow = null)
+        public async Task<Tuple<IEnumerable<Post>, int>> GetPageListAsync(Expression<Func<Post, bool>> filter, Dictionary<string, bool> sort, int pageIndex, int pageSize, IUnitOfWork uow = null)
         {
             // var db =await GetDatabaseAsync();
             //var data = await   db.GetCollection<Post>("Posts").FindAsync<Post>(filter);

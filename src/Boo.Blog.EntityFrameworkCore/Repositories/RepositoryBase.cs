@@ -1,6 +1,6 @@
 ﻿using Boo.Blog.Domain;
-using Boo.Blog.EntityFrameworkCore;
 using Boo.Blog.ToolKits.Configurations;
+using Boo.Blog.ToolKits.Extensions;
 using Dapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -34,12 +34,12 @@ namespace Boo.Blog.EntityFrameworkCore.Repositories
 
         public async Task<IDbTransaction> GetDbTransactionAsync() => (await GetDbContextAsync()).Database.CurrentTransaction?.GetDbTransaction();
 
-        public async Task<Tuple<IEnumerable<TEntity>, int>> GetPageListAsync(Expression<Func<TEntity, bool>> filter, Dictionary<Expression<Func<TEntity, object>>, bool> sort, int pageIndex, int pageSize, IUnitOfWork uow = null)
+        public async Task<Tuple<IEnumerable<TEntity>, int>> GetPageListAsync(Expression<Func<TEntity, bool>> filter, Dictionary<string, bool> sort, int pageIndex, int pageSize, IUnitOfWork uow = null)
         {
             var _uow = uow ?? UnitOfWorkManager.Begin(new AbpUnitOfWorkOptions());
             try
             {
-                var queryable = (await GetDbSetAsync()).AsQueryable();
+                var queryable = await GetQueryableAsync();// (await GetDbSetAsync()).AsQueryable();
                 if (filter != null)
                 {
                     queryable = queryable.Where(filter);
@@ -48,14 +48,7 @@ namespace Boo.Blog.EntityFrameworkCore.Repositories
                 {
                     foreach (var kv in sort)
                     {
-                        if (kv.Value)
-                        {
-                            queryable = queryable.OrderBy(kv.Key);
-                        }
-                        else
-                        {
-                            queryable = queryable.OrderByDescending(kv.Key);
-                        }
+                            queryable = queryable.SortBy(kv.Key,kv.Value);
                     }
                 }
                 var dataList = queryable.Skip(pageIndex * pageSize).Take(pageSize).ToList();
