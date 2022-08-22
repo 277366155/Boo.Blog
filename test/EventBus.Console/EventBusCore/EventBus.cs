@@ -86,7 +86,7 @@ namespace EventBusCore.ConsoleApp
 
         public void Subscribe<TEvent>(Action<TEvent> action) where TEvent : IEvent
         {
-            Subscribe(new ActionEventHanlder<TEvent>(action));
+            Subscribe(new ActionEventHandler<TEvent>(action));
         }
 
         public void Subscribe<TEvent>(IEnumerable<IEventHandler<TEvent>> eventHandlers)
@@ -119,7 +119,7 @@ namespace EventBusCore.ConsoleApp
                 }
                 catch (Exception ex)
                 {
-                    callback(tEvent, false, null);
+                    callback(tEvent, false, ex);
                 }
             }
         }

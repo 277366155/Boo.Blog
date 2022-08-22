@@ -1,9 +1,9 @@
 ﻿namespace EventBusCore.ConsoleApp
 {
-    public class ActionEventHanlder<TEvent> : IEventHandler<TEvent> where TEvent : IEvent
+    public class ActionEventHandler<TEvent> : IEventHandler<TEvent> where TEvent : IEvent
     {
         readonly Action<TEvent> _action;
-        public ActionEventHanlder(Action<TEvent> action)
+        public ActionEventHandler(Action<TEvent> action)
         {
             _action = action;
         }
