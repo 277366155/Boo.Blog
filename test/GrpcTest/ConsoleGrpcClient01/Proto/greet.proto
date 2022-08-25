@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option csharp_namespace = "ConsoleGrpcClient01";
+
+package greet;
+
+// The greeting service definition.
+service Greeter {
+  // Sends a greeting
+  rpc SayHello (StringMessage) returns (StringMessage);
+  rpc Bothway(stream StringMessage) returns (stream StringMessage);
+}
+
+service User{
+	rpc GetUserNameById(LongMessage) returns (StringMessage);
+}
+
+message StringMessage {
+  string value = 1;
+}
+
+message LongMessage {
+  int64 value = 1;
+}
