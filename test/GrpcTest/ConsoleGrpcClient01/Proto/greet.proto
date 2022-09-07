@@ -13,6 +13,7 @@ service Greeter {
 
 service User{
 	rpc GetUserNameById(LongMessage) returns (StringMessage);
+	rpc GetUserInfoById(LongMessage) returns (stream StringMessage);
 }
 
 message StringMessage {

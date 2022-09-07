@@ -14,4 +14,10 @@
     <ProjectReference Include="..\src\Boo.Blog.Middleware\Boo.Blog.Middleware.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Dockerfile">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

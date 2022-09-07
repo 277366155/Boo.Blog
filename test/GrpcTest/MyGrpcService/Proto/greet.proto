@@ -7,12 +7,13 @@ package greet;
 // The greeting service definition.
 service Greeter {
   // Sends a greeting
-  rpc SayHello (StringMessage) returns (StringMessage);
+  rpc SayHello (StringMessage) returns (StringMessage){}
   rpc Bothway(stream StringMessage) returns (stream StringMessage);
 }
 
 service User{
 	rpc GetUserNameById(LongMessage) returns (StringMessage);
+	rpc GetUserInfoById(LongMessage) returns (stream StringMessage);
 }
 
 message StringMessage {
