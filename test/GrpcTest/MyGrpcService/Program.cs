@@ -2,9 +2,11 @@ using Boo.Blog.ToolKits.Configurations;
 using CSRedis;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using MyGrpcService;
 using MyGrpcService.Services;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -21,6 +23,11 @@ app.MapGrpcService<UserService>();
 
 app.MapGet("/", () => "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
 
+var sw = new Stopwatch();
+sw.Start();
+RabbitMQ.Client.IModel channel = RabbitMQHelper.Channel;
+sw.Stop();
+Console.WriteLine($"channel´´½¨ºÄÊ±£º{sw.ElapsedMilliseconds}ms");
 app.Run();
 //Task.Factory.StartNew(() =>
 //{

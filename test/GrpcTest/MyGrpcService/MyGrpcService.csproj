@@ -5,8 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="scp44742\**" />
+    <Content Remove="scp44742\**" />
+    <EmbeddedResource Remove="scp44742\**" />
+    <None Remove="scp44742\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CSRedisCore" Version="3.8.3" />
     <PackageReference Include="Grpc.AspNetCore" Version="2.40.0" />
+    <PackageReference Include="RabbitMQ.Client" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,10 +41,6 @@
 	  <None Update="grpc.pfx">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="scp44742\" />
 	</ItemGroup>
 
 

@@ -58,10 +58,13 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleTest", "test\ConsoleTest\ConsoleTest.csproj", "{A88379C2-BAB5-4D22-BFE4-8CE6EBDDBEAD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GrpcTest", "GrpcTest", "{00D8770D-DBB7-476D-8856-CBEB3F85C96C}"
+	ProjectSection(SolutionItems) = preProject
+		test\GrpcTest\readme.grpc.demo.md = test\GrpcTest\readme.grpc.demo.md
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGrpcService", "test\GrpcTest\MyGrpcService\MyGrpcService.csproj", "{0DCF9D0B-D35B-4B76-8D4F-4CD982A63FD8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyGrpcService", "test\GrpcTest\MyGrpcService\MyGrpcService.csproj", "{0DCF9D0B-D35B-4B76-8D4F-4CD982A63FD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleGrpcClient01", "test\GrpcTest\ConsoleGrpcClient01\ConsoleGrpcClient01.csproj", "{4143400D-0540-4A69-953F-6D63E88C4125}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleGrpcClient01", "test\GrpcTest\ConsoleGrpcClient01\ConsoleGrpcClient01.csproj", "{4143400D-0540-4A69-953F-6D63E88C4125}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

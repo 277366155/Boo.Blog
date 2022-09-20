@@ -1,0 +1,11 @@
+﻿version: '3.7'
+
+services:
+  grpcclient:
+    image: grpcclient
+    hostname: grpcClient
+    build: .
+    container_name: 'grpcClient'
+    restart: always
+    extra_hosts:
+        ljtest.td365.com.cn: 128.0.23.63

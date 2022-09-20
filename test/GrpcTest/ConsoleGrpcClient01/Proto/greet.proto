@@ -12,8 +12,8 @@ service Greeter {
 }
 
 service User{
-	rpc GetUserNameById(LongMessage) returns (StringMessage);
-	rpc GetUserInfoById(LongMessage) returns (stream StringMessage);
+	rpc GetUserNameById(LongMessage) returns (stream StringMessage);
+	rpc GetUserInfoById(stream LongMessage) returns (stream StringMessage);
 }
 
 message StringMessage {
