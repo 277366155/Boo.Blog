@@ -1,23 +1,61 @@
 ﻿
 using Boo.Blog.ToolKits.Cache;
 using Boo.Blog.ToolKits.Configurations;
+using ConsoleTest;
 using Microsoft.Extensions.Configuration;
 
+while (true)
+{
+    Console.WriteLine("请选择：\r\n\t1-加密\r\n\t 2-解密");
+    var whileFlag = "1";
+    var read = Console.ReadLine();
 
-var task = Task.Factory.StartNew(() => Console.WriteLine(123));
+    if (read == "1")
+    {
+        while (whileFlag.ToLower() != "q")
+        {
+            Console.Write("待加密串：");
+            whileFlag = Console.ReadLine();
+            if (whileFlag.ToLower() == "q")
+                continue;
+            Console.Write("加密结果：");
+            Console.WriteLine(SM4Util.Sm4EncryptECB(whileFlag));
+            Console.Write("解密结果：");
+            Console.WriteLine(SM4Util.Sm4DecryptECB(SM4Util.Sm4EncryptECB(whileFlag)));
+            Console.WriteLine("----------------------------------------");
+        }
+    }
+    else if (read == "2")
+    {
+        while (whileFlag.ToLower() != "q")
+        {
+            Console.Write("待解密串：");
+            whileFlag = Console.ReadLine();
+            if (whileFlag.ToLower() == "q")
+                continue;
+            Console.Write("解密结果：");
+            Console.WriteLine(SM4Util.Sm4DecryptECB(whileFlag));
+            Console.Write("加密结果：");
+            Console.WriteLine(SM4Util.Sm4EncryptECB(SM4Util.Sm4DecryptECB(whileFlag)));
+            Console.WriteLine("----------------------------------------");
+        }
+    }
+}
 
 Console.Read();
 
-RedisHelper.Initialization(new CSRedis.CSRedisClient(AppSettings.Root["redisConnect"]));
-Console.Write("请输入key：");
-var key=Console.ReadLine();
-Console.Write("请输入token：");
-var token=Console.ReadLine();
-await RedisHelper.EvalAsync("if(redis.call('hexists',KEYS[1],ARGV[1])==1)  then local val=tonumber(redis.call('HGET',KEYS[1],ARGV[1])) redis.call('HSET',KEYS[1],ARGV[1],val+1)  else redis.call('HSET',KEYS[1],ARGV[1],1)  end ", key, token);
-Console.Write("插入数据完成，任意键继续");
-Console.ReadKey();
-await RedisHelper.EvalAsync($@"if(redis.call('hexists',KEYS[1],ARGV[1])==1)  then local val=tonumber(redis.call('HGET',KEYS[1],ARGV[1])) if(val<=1) then redis.call('HDEL',KEYS[1],ARGV[1]) redis.call('del',ARGV[1]) else redis.call('HSET',KEYS[1],ARGV[1],val-1)  end  end ", key, token);
-Console.Write("删除数据完成，任意键继续");
+#region lua脚本操作redis
+//RedisHelper.Initialization(new CSRedis.CSRedisClient(AppSettings.Root["redisConnect"]));
+//Console.Write("请输入key：");
+//var key=Console.ReadLine();
+//Console.Write("请输入token：");
+//var token=Console.ReadLine();
+//await RedisHelper.EvalAsync("if(redis.call('hexists',KEYS[1],ARGV[1])==1)  then local val=tonumber(redis.call('HGET',KEYS[1],ARGV[1])) redis.call('HSET',KEYS[1],ARGV[1],val+1)  else redis.call('HSET',KEYS[1],ARGV[1],1)  end ", key, token);
+//Console.Write("插入数据完成，任意键继续");
+//Console.ReadKey();
+//await RedisHelper.EvalAsync($@"if(redis.call('hexists',KEYS[1],ARGV[1])==1)  then local val=tonumber(redis.call('HGET',KEYS[1],ARGV[1])) if(val<=1) then redis.call('HDEL',KEYS[1],ARGV[1]) redis.call('del',ARGV[1]) else redis.call('HSET',KEYS[1],ARGV[1],val-1)  end  end ", key, token);
+//Console.Write("删除数据完成，任意键继续");
+#endregion lua脚本操作redis
 
 //try
 //{
@@ -34,7 +72,6 @@ Console.Write("删除数据完成，任意键继续");
 //{
 //    Console.WriteLine(ex.Message);
 //}
-Console.Read();
 
 //Number n = new Number(2, 2.0);
 //Number n2 = new Number(3, 3.0);

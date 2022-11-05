@@ -42,7 +42,11 @@ namespace Boo.Blog.ToolKits.Cache
             RedisHelper.Initialization(client);
             return client;
         }
-        
+        public  CSRedisClient GetRedisClient(RedisType redisType)
+        {
+            return _redisClientDic.GetValueOrDefault(redisType);
+        }
+
         #region string缓存
         public async Task<string> GetAsync(string key, RedisType redisType = RedisType.Default)
         {
@@ -82,6 +86,7 @@ namespace Boo.Blog.ToolKits.Cache
                 return data;
             }
         }
+
 
     }
 }

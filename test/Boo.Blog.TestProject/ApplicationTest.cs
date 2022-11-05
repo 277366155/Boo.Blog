@@ -1,10 +1,13 @@
 using Boo.Blog.Blog;
 using Boo.Blog.Blog.DTO;
+using Boo.Blog.ToolKits.Cache;
+using Boo.Blog.ToolKits.Configurations;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Volo.Abp;
+using Microsoft.Extensions.Configuration;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -43,6 +46,16 @@ namespace Boo.Blog.TestProject
                 }));
             }
             Task.WaitAll(taskList.ToArray());
+        }
+
+        [Theory]
+        [InlineData("testkey1","testValue",200)]
+        [InlineData("testkey1", "testValue2", 200)]
+        public void RedisLockTest(string key,string value,int timespan)
+        {
+            var redisHandler = new RedisHandler(AppSettings.Root.GetSection("Redis").Get<IEnumerable<RedisHandlerOption>>());
+            var redisClient = redisHandler.GetRedisClient(RedisType.Default);
+            outPut.WriteLine(redisClient.Set(key, value, timespan, CSRedis.RedisExistence.Nx).ToString());
         }
     }
 }
