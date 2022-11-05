@@ -6,7 +6,8 @@ using Microsoft.Extensions.Configuration;
 
 while (true)
 {
-    Console.WriteLine("请选择：\r\n\t1-加密\r\n\t 2-解密");
+    Console.WriteLine("请选择：\r\n\t1-加密\r\n\t2-解密");
+    Console.WriteLine("----------------------------------------");
     var whileFlag = "1";
     var read = Console.ReadLine();
 
@@ -14,7 +15,7 @@ while (true)
     {
         while (whileFlag.ToLower() != "q")
         {
-            Console.Write("待加密串：");
+            Console.Write("待加密串（输入q返回菜单）：");
             whileFlag = Console.ReadLine();
             if (whileFlag.ToLower() == "q")
                 continue;
@@ -29,7 +30,7 @@ while (true)
     {
         while (whileFlag.ToLower() != "q")
         {
-            Console.Write("待解密串：");
+            Console.Write("待解密串（输入q返回菜单）：");
             whileFlag = Console.ReadLine();
             if (whileFlag.ToLower() == "q")
                 continue;
