@@ -53,5 +53,11 @@ namespace Boo.Blog.HttpApi.Controllers
         {
             return null;
         }
+
+        [HttpGet("{tenantCode}/test.html")]
+        public async Task<IActionResult> GetTestHtml(string tenantCode)
+        {
+            return new ContentResult() {  Content= $"<h1>{tenantCode}</h1>", ContentType="text/html" };
+        }
     }
 }

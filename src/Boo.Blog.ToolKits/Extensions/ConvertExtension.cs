@@ -1,7 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.IO;
+﻿using System.IO;
 using System.Text;
+using System.Text.Json;
 using System.Xml.Serialization;
 
 namespace Boo.Blog.ToolKits.Extensions
@@ -21,7 +20,7 @@ namespace Boo.Blog.ToolKits.Extensions
         {
             if (obj != null)
             {
-                return JsonConvert.SerializeObject(obj);
+                return JsonSerializer.Serialize(obj);
             }
 
             return "";
@@ -35,9 +34,9 @@ namespace Boo.Blog.ToolKits.Extensions
         /// <returns></returns>
         public static T ToObj<T>(this string json) where T : class
         {
-            if (!json.IsNullOrWhiteSpace0())
+            if (!string.IsNullOrWhiteSpace(json))
             {
-                return JsonConvert.DeserializeObject<T>(json);
+                return JsonSerializer.Deserialize<T>(json);
             }
             return default(T);
         }

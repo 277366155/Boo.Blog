@@ -28,7 +28,8 @@ namespace TangPoem.Web
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            var conn = new MySqlConnection(AppSettings.Root.GetConnectionString("MySql"));
+            var configuration = context.Services.GetConfiguration();
+            var conn = new MySqlConnection(configuration.GetConnectionString("MySql"));
             context.Services.Configure<AbpDbContextOptions>(opt =>
             {
                 opt.Configure(c =>

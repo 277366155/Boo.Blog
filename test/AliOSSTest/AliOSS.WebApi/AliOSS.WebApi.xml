@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AliOSS.WebApi</name>
+    </assembly>
+    <members>
+        <member name="M:AliOSS.WebApi.Service.AliCloudOSSService.SimpleUploads(System.IO.Stream,System.String)">
+            <summary>
+            通过文件流上传
+            </summary>
+            <param name="context"></param>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AliOSS.WebApi.Service.AliCloudOSSService.SimpleUploads(System.String)">
+            <summary>
+            从程序本地上传文件
+            </summary>
+            <param name="localFileName">文件路径</param>
+            <returns></returns>
+        </member>
+        <member name="M:AliOSS.WebApi.Service.AliCloudOSSService.GetObjectKey(System.String,System.String)">
+            <summary>
+            获取存储对象文件名
+            </summary>
+            <param name="localFileName">上传文件名</param>
+            <param name="objectBaseName">oss中的目录位置</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

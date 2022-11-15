@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "TangPoem.Application.Test": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:53608;http://localhost:53609"
+    }
+  }
+}

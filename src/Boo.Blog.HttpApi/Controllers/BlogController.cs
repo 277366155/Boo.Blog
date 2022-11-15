@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Boo.Blog.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiExplorerSettings(GroupName = SwaggerGrouping.GroupNameV2)]
     public class BlogController : ApiBaseController
     {

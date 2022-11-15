@@ -20,17 +20,19 @@ namespace Boo.Blog.EntityFrameworkCore.Repositories
 {
     public class RepositoryBase<TContext, TEntity> : EfCoreRepository<TContext, TEntity, long>, IRepositoryBase<TEntity>, IDapperRepository where TEntity : class, IEntity<long> where TContext : IEfCoreDbContext
     {
+        private readonly IDbContextProvider<TContext> _dbContextProvider;
         public RepositoryBase(IDbContextProvider<TContext> dbContextProvider) : base(dbContextProvider)
         {
+            _dbContextProvider= dbContextProvider;  
         }
 
         [Obsolete("Use GetDbConnectionAsync method.")]
-        public IDbConnection DbConnection => GetDbContextAsync().ConfigureAwait(false).GetAwaiter().GetResult().Database.GetDbConnection();
+        public IDbConnection DbConnection => _dbContextProvider.GetDbContext().Database.GetDbConnection();
 
         public async Task<IDbConnection> GetDbConnectionAsync() => (await GetDbContextAsync()).Database.GetDbConnection();
 
         [Obsolete("Use GetDbTransactionAsync method.")]
-        public IDbTransaction DbTransaction => GetDbContextAsync().Result.Database.CurrentTransaction?.GetDbTransaction();
+        public IDbTransaction DbTransaction => _dbContextProvider.GetDbContext().Database.CurrentTransaction?.GetDbTransaction();
 
         public async Task<IDbTransaction> GetDbTransactionAsync() => (await GetDbContextAsync()).Database.CurrentTransaction?.GetDbTransaction();
 

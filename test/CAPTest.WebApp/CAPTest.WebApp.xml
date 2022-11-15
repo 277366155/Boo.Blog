@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CAPTest.WebApp</name>
+    </assembly>
+    <members>
+        <member name="M:CAPTest.WebApp.Controllers.HomeController.Get1(System.Int32,DotNetCore.CAP.ICapPublisher)">
+            <summary>
+            发布路由为：test.show
+            </summary>
+            <param name="count"></param>
+            <param name="capBus"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPTest.WebApp.Controllers.HomeController.Get2(DotNetCore.CAP.ICapPublisher)">
+             <summary>
+            发布路由为：service.show
+             </summary>
+             <param name="capBus"></param>
+             <returns></returns>
+        </member>
+    </members>
+</doc>

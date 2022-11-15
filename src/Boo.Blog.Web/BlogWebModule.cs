@@ -17,6 +17,8 @@ using Volo.Abp.Autofac;
 using Volo.Abp.Modularity;
 using Boo.Blog.Domain.MultiTenant.IRepositories;
 using Boo.Blog.EntityFrameworkCore.Repositories.MultiTenant;
+using Microsoft.Extensions.Configuration;
+using Boo.Blog.CAP;
 
 namespace Boo.Blog.Web
 {
@@ -31,8 +33,14 @@ namespace Boo.Blog.Web
     )]
     public class BlogWebModule : AbpModule
     {
+        public override void PreConfigureServices(ServiceConfigurationContext context)
+        {
+            var capOpt = context.Services.GetConfiguration().GetSection("CAPOption").Get<CAPOption>();
+            context.Services.AddSingleton(capOpt);
+        }
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
+            var configuration = context.Services.GetConfiguration();
             context.Services.AddSwagger();
             //身份验证
             context.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -44,9 +52,9 @@ namespace Boo.Blog.Web
                         ValidateAudience = true,
                         ClockSkew = TimeSpan.FromSeconds(60),
                         ValidateIssuerSigningKey = true,
-                        ValidAudience = AppSettings.Root["Jwt:Domain"],
-                        ValidIssuer = AppSettings.Root["Jwt:Domain"],
-                        IssuerSigningKey = new SymmetricSecurityKey(AppSettings.Root["Jwt:SecurityKey"].GetBytes())
+                        ValidAudience = configuration["Jwt:Domain"],
+                        ValidIssuer = configuration["Jwt:Domain"],
+                        IssuerSigningKey = new SymmetricSecurityKey(configuration["Jwt:SecurityKey"].GetBytes())
                     };
                 });
             //认证授权

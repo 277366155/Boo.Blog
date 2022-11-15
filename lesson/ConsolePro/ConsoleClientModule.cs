@@ -17,7 +17,8 @@ namespace ConsolePro
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            var conn = new MySqlConnection(AppSettings.Root.GetConnectionString("MySql"));
+            var configration = context.Services.GetConfiguration();
+            var conn = new MySqlConnection(configration.GetConnectionString("MySql"));
             context.Services.Configure<AbpDbContextOptions>(opt =>
             {
                 opt.Configure(c =>

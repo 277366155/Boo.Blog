@@ -6,6 +6,7 @@ using Boo.Blog.ToolKits.Cache;
 using Boo.Blog.ToolKits.Configurations;
 using Boo.Blog.ToolKits.Extensions;
 using Boo.Blog.ToolKits.JwtUtil;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Linq;
 using System.Net;
@@ -22,6 +23,7 @@ namespace Boo.Blog.Application.Authorize
         IRedisHandler _redisHandler;
         readonly IHttpClientFactory _httpClient;
         ITenantService _tenantService;
+        public IConfiguration Configration { get; set; }
         public AuthorizeService(IHttpClientFactory httpClient,ITenantService tenantService,IRedisHandler redisHandler)
         {
             _httpClient = httpClient;
@@ -48,7 +50,7 @@ namespace Boo.Blog.Application.Authorize
             }
             var userData = content.ToObj<UserResponseDTO>();
             var tenantDto= await _tenantService.GetOrAddTenantByCode(userData.Login,userData.Name);
-            int cacheMinutes=AppSettings.Root["Jwt:Expires"].TryToInt();
+            int cacheMinutes= Configration["Jwt:Expires"].TryToInt();
             await _redisHandler.SetAsync(tenantDto.TenantCode, tenantDto.ToJson(), new TimeSpan(0, cacheMinutes, 0));
             if (userData == null || userData.Id != GitHubConfig.UserId)
             {
@@ -57,9 +59,9 @@ namespace Boo.Blog.Application.Authorize
             var token = JwtUtil.JwtSecurityToken(
                 tenantDto.TenantCode,
                 tenantDto.TenantName,
-                AppSettings.Root["Jwt:Domain"],
+                Configration["Jwt:Domain"],
                 cacheMinutes,
-                AppSettings.Root["Jwt:SecurityKey"]);
+                Configration["Jwt:SecurityKey"]);
 
             return token;
         }

@@ -11,7 +11,7 @@
 rpc SayHello(HelloRequest) returns (HelloResponse);
 ```
 
-2. 服务端流式RPC（returns中使用stream修饰返回类型），即客户端发送一个请求给服务端，可获取一个数据流用来读取一系列消息。客户端从返回的数据流里一直读取，直到没有更多消息为止。【当客户端ip变化之后，是否有影响?】
+2. 服务端流式RPC（returns中使用stream修饰返回类型），即客户端发送一个请求给服务端，可获取一个数据流用来读取一系列消息。客户端从返回的数据流里一直读取，直到没有更多消息为止。
 声明方式：
 ```
 rpc LotsOfReplies(HelloRequest) returns (stream HelloResponse);
@@ -49,7 +49,7 @@ service User{
 }
 
 service TestSrv{
-	rpc	GetPersonList(GetPersonRequest) returns(PersonListResponse){}
+	rpc GetPersonList(GetPersonRequest) returns(PersonListResponse){}
 }
 
 //begin 通用Message
@@ -95,10 +95,10 @@ message PagerResponse{
 
 
 message GetPersonRequest{
-	string Name=1;
+    string Name=1;
     string BrithdayFrom=2;
     string BrithdayTo=3;
-	PagerRequest Pager=4;
+    PagerRequest Pager=4;
 }
 
 message Person{
@@ -109,9 +109,9 @@ message Person{
 }
 
 message PersonListResponse{
-	//repeated表示一个List列表
-	repeated Person List=1;
-	PagerResponse Pager=2;
+    //repeated表示一个List列表
+    repeated Person List=1;
+    PagerResponse Pager=2;
 }
 ```
 
@@ -125,7 +125,7 @@ message PersonListResponse{
         "Protocols": "Http2",
         "Certificate": {
           "Path": "8405752__td365.com.cn.pfx",
-          "Password": "BV40U3E9"
+          "Password": "BV40U3E9BOO"
         }
       }
     }

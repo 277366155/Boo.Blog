@@ -1,4 +1,5 @@
 ﻿using Boo.Blog.Application;
+using Boo.Blog.CAP;
 using Boo.Blog.ToolKits.Cache;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,7 +14,8 @@ namespace Boo.Blog
     [DependsOn(
         typeof(AbpAutoMapperModule),
         typeof(AbpIdentityApplicationModule),
-        typeof(BlogDomainModule)
+        typeof(BlogDomainModule),
+        typeof(BooBlogCAPModule)
         )]
     public class BlogApplicationModule : AbpModule
     {
