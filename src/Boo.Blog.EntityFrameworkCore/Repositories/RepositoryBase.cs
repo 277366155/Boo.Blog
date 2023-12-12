@@ -25,7 +25,7 @@ namespace Boo.Blog.EntityFrameworkCore.Repositories
         }
 
         [Obsolete("Use GetDbConnectionAsync method.")]
-        public IDbConnection DbConnection => GetDbContextAsync().Result.Database.GetDbConnection();
+        public IDbConnection DbConnection => GetDbContextAsync().ConfigureAwait(false).GetAwaiter().GetResult().Database.GetDbConnection();
 
         public async Task<IDbConnection> GetDbConnectionAsync() => (await GetDbContextAsync()).Database.GetDbConnection();
 
